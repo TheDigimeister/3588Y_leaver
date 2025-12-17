@@ -407,7 +407,7 @@ void opcontrol() {
 			intake.move(-intake_speed);
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			if (arm_sensor.get_position() < 12000) {
+			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
 				intake.move(intake_speed);
 			}

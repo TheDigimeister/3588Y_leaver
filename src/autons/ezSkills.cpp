@@ -36,7 +36,7 @@ void ezSkills(){
     chassis.moveToPoint(25, -48, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, false);
     pto.set_value(false);
     pros::delay(100);
-    while (arm_sensor.get_position() < 13000) {intake.move(100);}
+    while (arm_sensor.get_position() < 11000) {intake.move(100);}
     while (arm_sensor.get_position() > 200) {intake.move(-127);}
     pto.set_value(true);
     pros::delay(100);
@@ -55,7 +55,7 @@ void ezSkills(){
     chassis.moveToPoint(25, -47, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, false);
     pto.set_value(false);
     pros::delay(100);
-    while (arm_sensor.get_position() < 13000) {intake.move(100);}
+    while (arm_sensor.get_position() < 11000) {intake.move(100);}
     while (arm_sensor.get_position() > 200) {intake.move(-127);}
     pto.set_value(true);
     pros::delay(100);
@@ -94,7 +94,7 @@ void ezSkills(){
     chassis.moveToPoint(-25, 47, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, false);
     pto.set_value(false);
     pros::delay(100);
-    while (arm_sensor.get_position() < 13000) {intake.move(100);}
+    while (arm_sensor.get_position() < 11000) {intake.move(100);}
     while (arm_sensor.get_position() > 200) {intake.move(-127);}
     pto.set_value(true);
     pros::delay(100);
@@ -115,7 +115,7 @@ void ezSkills(){
     chassis.moveToPoint(-25, 47, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, false);
     pto.set_value(false);
     pros::delay(100);
-    while (arm_sensor.get_position() < 13000) {intake.move(100);}
+    while (arm_sensor.get_position() < 11000) {intake.move(100);}
     while (arm_sensor.get_position() > 200) {intake.move(-127);}
     pto.set_value(true);
     pros::delay(100);
