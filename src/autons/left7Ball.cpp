@@ -40,4 +40,20 @@ void left7Ball(){
     pros::delay(100);
     intake.move(127);
 
+    chassis.turnToHeading(270, 500, {}, false);
+    chassis.setPose(chassis.getPose().x, positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
+
+    left_mg.move(50);
+    right_mg.move(50);
+    pros::delay(150);
+    chassis.turnToHeading(340, 500, {.minSpeed=5, .earlyExitRange=1}, false);
+    left_mg.move(-50);
+    right_mg.move(-50);
+    pros::delay(300);
+    chassis.turnToHeading(270, 500, {.minSpeed=5, .earlyExitRange=1}, false);
+    left_mg.move(-100);
+    right_mg.move(-100);
+    pros::delay(450);
+    chassis.turnToHeading(270, 500, {}, false);
+
 }

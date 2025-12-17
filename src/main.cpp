@@ -10,6 +10,20 @@ const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
+int selected_auton = 6;
+bool auton_selected = false;
+
+const char* auton_names[] = {
+    "None",
+    "Left 7 Ball", 
+    "Left Middle Goal",
+    "Right 7 Ball",
+	"Right Low Goal",
+    "Skills",
+	"EZ Skills",
+	"PID Tune"
+};
+
 /**
  * A callback function for LLEMU's center button.
  *
@@ -17,13 +31,21 @@ const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correcti
  * "I was pressed!" and nothing.
  */
 void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
+    auton_selected = true;
+}
+
+void on_left_button() {
+    if (!auton_selected) {
+        selected_auton--;
+        if (selected_auton < 1) selected_auton = 7; // Wrap to last auton
+    }
+}
+
+void on_right_button() {
+    if (!auton_selected) {
+        selected_auton++;
+        if (selected_auton > 7) selected_auton = 1; // Wrap to first auton
+    }
 }
 
 /**
@@ -34,17 +56,38 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
-
-	pros::lcd::register_btn1_cb(on_center_button);
+	pros::lcd::register_btn0_cb(on_left_button);   // Left button
+    pros::lcd::register_btn1_cb(on_center_button); // Center button  
+    pros::lcd::register_btn2_cb(on_right_button);  // Right button
 
 	chassis.calibrate();
 
 	chassis.setPose(0,0,90);
 
+	arm_sensor.set_position(0);
+
+	pros::Task screen_task([&] {
+		while (!auton_selected) {
+		// pros::lcd::clear();
+		pros::lcd::print(0, "Auton Selector");
+		pros::lcd::print(1, "< %s >", auton_names[selected_auton]);
+		pros::lcd::print(2, "Press center to select");
+		pros::lcd::print(3, "Selected: %d", selected_auton);
+		// pros::lcd::print(5,"AI Sensor objects detected: %d", vision.get_object_count());
+		pros::delay(100);
+	}
+        
+		// Display selected auton
+		pros::lcd::print(0, "Auton Selected!");
+		pros::lcd::print(1, "%s", auton_names[selected_auton]);
+		pros::lcd::print(2, "ID: %i", selected_auton);
+		pros::lcd::clear_line(3);
+
+	});
+
 	pros::Task distance_resets([&] {
 
-		while(false) {
+		while(true) {
 
 			float frontReading = front_dist.get() * MM_TO_IN;
 			float leftReading = left_dist.get() * MM_TO_IN;
@@ -276,7 +319,30 @@ void competition_initialize() {}
  */
 void autonomous() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
-	skills();
+
+	switch (selected_auton) {
+		case 1:
+			left7Ball();
+			break;
+		case 2:
+			leftMiddleGoal();
+			break;
+		case 3:
+			right7Ball();
+			break;
+		case 4:
+			rightLowGoal();
+			break;
+		case 5:
+			skills();
+			break;
+		case 6:
+			ezSkills();
+			break;
+		case 7:
+			pidTune();
+			break;
+	}
 }
 
 /**
@@ -298,6 +364,10 @@ void opcontrol() {
 	bool levelState = false;
 	bool prevLevelState = false;
 
+	bool matchloadPressed = false;
+	bool matchloadState = false;
+	bool prevMatchloadState = false;
+
 	bool pto_state=false;
 	pto.set_value(false);
 
@@ -311,13 +381,20 @@ void opcontrol() {
 	while (true) {
 
 		levelPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
+		matchloadPressed = controller.get_digital(DIGITAL_A);
 
 		if (levelPressed && !prevLevelState) {
 			levelState = !levelState;
 			level.set_value(levelState);
 		}
 
+		if (matchloadPressed && !prevMatchloadState) {
+			matchloadState = !matchloadState;
+			matchload.set_value(matchloadState);
+		}
+
 		prevLevelState = levelPressed;
+		prevMatchloadState = matchloadPressed;
 
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			pto.set_value(true);
@@ -330,21 +407,24 @@ void opcontrol() {
 			intake.move(-intake_speed);
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			pto.set_value(false);
-			pros::delay(100);
-			if (arm_sensor.get_position() < 13000) {intake.move(intake_speed);}
+			if (arm_sensor.get_position() < 12000) {
+				pto.set_value(false);
+				intake.move(intake_speed);
+			}
 			else {intake.move(0);}
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-			pto.set_value(false);
-			pros::delay(100);
-			if (arm_sensor.get_position() > 200) {intake.move(-intake_speed);}
+			if (arm_sensor.get_position() > 100) {
+				pto.set_value(false);
+				intake.move(-intake_speed);
+			}
 			else {intake.move(0);}
 		}
 		else {
-			pto.set_value(false);
-			pros::delay(100);
-			if (arm_sensor.get_position() > 200) {intake.move(-intake_speed);}
+			if (arm_sensor.get_position() > 100) {
+				pto.set_value(false);
+				intake.move(-20);
+			}
 			else {intake.move(0);}
 		}
 		

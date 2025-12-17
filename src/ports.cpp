@@ -14,7 +14,7 @@ pros::Distance back_dist(9);
 
 pros::ADIDigitalOut level('C');
 pros::ADIDigitalOut pto('A');
-pros::ADIDigitalOut matchload('D');
+pros::ADIDigitalOut matchload('E');
 // pros::ADIDigitalOut descore_right('');
 // pros::ADIDigitalOut descore_left('');
 

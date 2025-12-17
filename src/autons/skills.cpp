@@ -23,17 +23,17 @@ void skills() {
     // drive through west parking
     left_mg.move(80);
     right_mg.move(80);
-    pros::delay(1500);
+    pros::delay(1750);
 
     // reset after west parking
     chassis.turnToHeading(90, 1000, {}, false);
     chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), chassis.getPose().theta);
 
     // middle goal score
-    chassis.turnToPoint(-33, 24, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
-    chassis.moveToPoint(-33, 24, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
+    chassis.turnToPoint(-24, 24, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
+    chassis.moveToPoint(-24, 24, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
     // chassis.turnToPoint(-10, 10, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
-    chassis.turnToHeading(315, 1000, {}, false);
+    chassis.turnToHeading(315, 2000, {.maxSpeed=80}, false);
     level.set_value(false);
     // chassis.moveToPoint(-10, 10, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
     left_mg.move(-50);
@@ -43,8 +43,8 @@ void skills() {
     right_mg.move(0);
     pto.set_value(false);
     pros::delay(100);
-    while (arm_sensor.get_position() < 13000) {intake.move(127);}
-    while (arm_sensor.get_position() > 200) {intake.move(-127);}
+    while (arm_sensor.get_position() < 12000) {intake.move(72);}
+    while (arm_sensor.get_position() > 200) {intake.move(-20);}
     pto.set_value(true);
     level.set_value(true);
     pros::delay(100);

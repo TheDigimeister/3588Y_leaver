@@ -24,10 +24,23 @@ void rightLowGoal(){
 
     chassis.turnToPoint(-24, -24, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
     chassis.moveToPoint(-24, -24, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
-    chassis.turnToPoint(-10, -10, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
-    chassis.moveToPoint(-10, -10, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
-    chassis.turnToPoint(-48, -47, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
-    chassis.moveToPoint(-48, -47, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
+
+    chassis.turnToHeading(45, 1000, {}, false);
+    left_mg.move(50);
+    right_mg.move(50);
+    pros::delay(550);
+    left_mg.move(0);
+    right_mg.move(0);
+    pto.set_value(true);
+    pros::delay(100);
+    intake.move(-127);    
+    pros::delay(1000);
+    pto.set_value(true);
+    pros::delay(100);
+    intake.move(127);
+
+    chassis.turnToPoint(-48, -47, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=1}, true);
+    chassis.moveToPoint(-48, -47, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
     
     chassis.turnToHeading(270, 1000, {}, false);
     chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
@@ -42,4 +55,20 @@ void rightLowGoal(){
     pto.set_value(true);
     pros::delay(100);
     intake.move(127);
+
+    chassis.turnToHeading(270, 500, {}, false);
+    chassis.setPose(chassis.getPose().x, positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), chassis.getPose().theta);
+
+    left_mg.move(50);
+    right_mg.move(50);
+    pros::delay(150);
+    chassis.turnToHeading(340, 500, {.minSpeed=5, .earlyExitRange=1}, false);
+    left_mg.move(-50);
+    right_mg.move(-50);
+    pros::delay(300);
+    chassis.turnToHeading(270, 500, {.minSpeed=5, .earlyExitRange=1}, false);
+    left_mg.move(-100);
+    right_mg.move(-100);
+    pros::delay(450);
+    chassis.turnToHeading(270, 500, {}, false);
 }
