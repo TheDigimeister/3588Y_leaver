@@ -5,6 +5,7 @@
 #include "pros/distance.hpp"
 #include "pros/motor_group.hpp"
 #include "pros/motors.hpp"
+#include "pros/optical.hpp"
 #include "pros/rotation.hpp"
 
 extern pros::Controller controller;
@@ -19,8 +20,7 @@ extern pros::MotorGroup intake;
 extern pros::ADIDigitalOut level;
 extern pros::ADIDigitalOut matchload;
 extern pros::ADIDigitalOut pto;
-extern pros::ADIDigitalOut descore_left;
-extern pros::ADIDigitalOut descore_right;
+extern pros::ADIDigitalOut descore;
 
 extern pros::Distance front_dist;
 extern pros::Distance back_dist;
@@ -28,3 +28,8 @@ extern pros::Distance left_dist;
 extern pros::Distance right_dist;
 
 extern pros::Rotation arm_sensor;
+
+extern pros::Optical matchload_right;
+extern pros::Optical matchload_left;
+
+extern pros::ADIDigitalOut gate;

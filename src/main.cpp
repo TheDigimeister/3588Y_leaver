@@ -4,13 +4,14 @@
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 #include "pros/motors.h"
+#include "pros/optical.h"
 
 
 const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90°/270° 
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
-int selected_auton = 6;
+int selected_auton = 4;
 bool auton_selected = false;
 
 const char* auton_names[] = {
@@ -65,6 +66,19 @@ void initialize() {
 	chassis.setPose(0,0,90);
 
 	arm_sensor.set_position(0);
+
+	matchload_right.set_integration_time(20);
+	matchload_left.set_integration_time(20);
+
+	matchload_right.set_led_pwm(100);
+	matchload_left.set_led_pwm(100);
+
+	// pros::Task sensor_check([&] {
+	// 	while(true){
+	// 	std::printf("Hue L: %.3f, Proximity L: %3d, Hue R: %.3f, Proximity R: %3d\n", matchload_left.get_hue(), matchload_left.get_proximity(), matchload_right.get_hue(), matchload_right.get_proximity());
+	// 	pros::delay(100);
+	// 	}
+	// });
 
 	pros::Task screen_task([&] {
 		while (!auton_selected) {
@@ -360,6 +374,7 @@ void autonomous() {
  */
 void opcontrol() {
 
+
 	bool levelPressed = false;
 	bool levelState = false;
 	bool prevLevelState = false;
@@ -367,6 +382,10 @@ void opcontrol() {
 	bool matchloadPressed = false;
 	bool matchloadState = false;
 	bool prevMatchloadState = false;
+
+	bool descorePressed = false;
+	bool descoreState = false;
+	bool prevDescoreState = false;
 
 	bool pto_state=false;
 	pto.set_value(false);
@@ -382,6 +401,7 @@ void opcontrol() {
 
 		levelPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
 		matchloadPressed = controller.get_digital(DIGITAL_A);
+		descorePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
 
 		if (levelPressed && !prevLevelState) {
 			levelState = !levelState;
@@ -393,13 +413,26 @@ void opcontrol() {
 			matchload.set_value(matchloadState);
 		}
 
+		if (descorePressed && !prevDescoreState) {
+			descoreState = !descoreState;
+			descore.set_value(descoreState);
+		}
+
 		prevLevelState = levelPressed;
 		prevMatchloadState = matchloadPressed;
+		prevDescoreState = descorePressed;
 
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			pto.set_value(true);
-			pros::delay(100);
-			intake.move(intake_speed);
+			gate.set_value(false);
+			if (arm_sensor.get_position() > 100) {
+				pto.set_value(false);
+				intake.move(-100);
+			}
+			else {
+				pto.set_value(true);
+				pros::delay(100);
+				intake.move(intake_speed);
+			}
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			pto.set_value(true);
@@ -407,6 +440,7 @@ void opcontrol() {
 			intake.move(-intake_speed);
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
 				intake.move(intake_speed);
@@ -423,7 +457,7 @@ void opcontrol() {
 		else {
 			if (arm_sensor.get_position() > 100) {
 				pto.set_value(false);
-				intake.move(-20);
+				intake.move(-100);
 			}
 			else {intake.move(0);}
 		}
