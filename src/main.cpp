@@ -445,7 +445,7 @@ void opcontrol() {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
-				intake_speed=65;
+				intake_speed=60;
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
@@ -454,7 +454,7 @@ void opcontrol() {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
-				intake_speed=55;
+				intake_speed=50;
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
@@ -463,17 +463,20 @@ void opcontrol() {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
-				intake_speed=30;
+				intake_speed=35;
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
 		}
 		else {
-			if (arm_sensor.get_position() > 100) {
+			if (arm_sensor.get_position() > 200) {
 				pto.set_value(false);
 				intake.move(-100);
 			}
-			else {intake.move(0);}
+			else {
+				intake.move(0);
+				pto.set_value(true);
+			}
 		}
 		
     	// get left y and right x positions
