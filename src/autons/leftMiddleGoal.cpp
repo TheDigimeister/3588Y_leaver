@@ -29,20 +29,20 @@ void leftMiddleGoal(){
     chassis.setPose(chassis.getPose().x, positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
 
     // matchload
-    chassis.moveToPoint(-65, 46.5, 1100, {.forwards=true, .maxSpeed=45, .minSpeed=45}, true);
-    pros::delay(700);
+    chassis.moveToPoint(-65, 46.5, 950, {.forwards=true, .maxSpeed=45, .minSpeed=45}, true);
+    pros::delay(950);
 
     //high goal
-    chassis.moveToPoint(-25.3, 46.7, 2000, {.forwards=false, .maxSpeed=50}, false);
+    chassis.moveToPoint(-25.3, 47.8, 1250, {.forwards=false, .maxSpeed=60}, false);
     pto.set_value(false);
     gate.set_value(true);
     pros::delay(200);
     intake.move(127);
     pros::delay(50);
     intake.move(64);
-    pros::delay(800);
+    pros::delay(700);
     intake.move(-127);
-    pros::delay(200);
+    pros::delay(100);
     pto.set_value(true);
     pros::delay(100);
     intake.move(127);
@@ -52,24 +52,23 @@ void leftMiddleGoal(){
     // middle goal
     chassis.turnToPoint(-41, 47, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
     chassis.moveToPoint(-41, 47, 2000, {.forwards=true, .maxSpeed=100, .minSpeed=5, .earlyExitRange=5}, true);
-    chassis.turnToPoint(-8, 16, 2000, {.forwards=true, .maxSpeed=100}, true);
-    chassis.moveToPoint(-8, 16, 2000, {.forwards=true, .maxSpeed=90}, true);
+    chassis.turnToPoint(-11.5, 18, 2000, {.forwards=true, .maxSpeed=100}, true);
+    chassis.moveToPoint(-11.5, 18, 2000, {.forwards=true, .maxSpeed=90}, true);
     level.set_value(false);
     pros::delay(100);
-    chassis.turnToHeading(315,2000, {.maxSpeed=80}, false);
+    chassis.turnToHeading(320,2000, {.maxSpeed=80}, false);
     right_mg.move(-60);
     left_mg.move(-60);
-    pros::delay(500);
+    pros::delay(380);
+    intake.move(0);
     right_mg.move(0);
     left_mg.move(0);
     pto.set_value(false);
     descore.set_value(false);
     gate.set_value(true);
-    pros::delay(200);
-    intake.move(40);
-    pros::delay(50);
-    intake.move(20);
-    pros::delay(800);
+    pros::delay(100);
+    intake.move(45);
+    pros::delay(650);
     intake.move(-127);
     pros::delay(200);
     pto.set_value(true);
@@ -78,10 +77,17 @@ void leftMiddleGoal(){
     gate.set_value(false);
 
     // descore
-    chassis.moveToPoint(-34, 34, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
-    chassis.turnToPoint(-6, 38, 2000, {.forwards=true, .maxSpeed=80}, true);
-    chassis.moveToPoint(-6, 38, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
-    chassis.turnToHeading(110, 2000, {}, false);
+    chassis.turnToHeading(315, 1000, {}, false);
+    left_mg.move(80);
+    right_mg.move(80);
+    pros::delay(500);
+    chassis.turnToHeading(90, 1000, {}, false);
+    chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), chassis.getPose().theta);
+    return;
+    chassis.moveToPoint(-30, 31.5, 2000, {.forwards=true, .maxSpeed=127}, true);
+    chassis.turnToHeading(90,1000, {}, true);
+    chassis.moveToPoint(-5.7, 37, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
+    chassis.turnToHeading(115, 2000, {}, false);
 
     // leftMiddleGoal
 
