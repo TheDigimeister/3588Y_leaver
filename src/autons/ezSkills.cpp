@@ -72,9 +72,7 @@ void ezSkills(){
     pto.set_value(false);
     gate.set_value(true);
     pros::delay(200);
-    intake.move(120);
-    pros::delay(80);
-    intake.move(51);
+    intake.move(65);
     pros::delay(800);
     intake.move(-127);
     pros::delay(200);
@@ -107,13 +105,13 @@ void ezSkills(){
     
     // SE long goal score again
     chassis.turnToPoint(25, -49, 1000, {.forwards=false, .maxSpeed=80, .minSpeed=5, .earlyExitRange=1}, true);
-    chassis.moveToPoint(25, -49, 2500, {.forwards=false, .maxSpeed=55}, false);
+    chassis.moveToPoint(25, -49, 2000, {.forwards=false, .maxSpeed=60}, false);
     pto.set_value(false);
     gate.set_value(true);
     pros::delay(200);
     intake.move(100);
     pros::delay(80);
-    intake.move(35);
+    intake.move(55);
     pros::delay(800);
     // intake.move(-127);
     // pros::delay(200);
@@ -132,8 +130,8 @@ void ezSkills(){
     chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
     
     // NE long goal score
-    matchload.set_value(false);
 
+    matchload.set_value(false);
     chassis.moveToPose(64, -16, 0, 2000, {.horizontalDrift=15, .minSpeed=127});
     // left_mg.move(50);
     // right_mg.move(50);
@@ -141,8 +139,8 @@ void ezSkills(){
     pto.set_value(false);
     gate.set_value(true);
     pros::delay(200);
-    intake.move(100);
-    pros::delay(200);
+    intake.move(127);
+    pros::delay(100);
     intake.move(-127);
     pros::delay(300);
     pto.set_value(true);
@@ -170,10 +168,10 @@ void ezSkills(){
     pto.set_value(false);
     gate.set_value(true);
     pros::delay(200);
-    intake.move(100);
-    pros::delay(80);
-    intake.move(50);
-    pros::delay(800);
+    intake.move(90);
+    pros::delay(100);
+    intake.move(55);
+    pros::delay(900);
     intake.move(-127);
     pros::delay(200);
     pto.set_value(true);
@@ -190,10 +188,10 @@ void ezSkills(){
     pto.set_value(false);
     gate.set_value(true);
     pros::delay(200);
-    intake.move(100);
-    pros::delay(80);
-    intake.move(40);
-    pros::delay(800);
+    intake.move(90);
+    pros::delay(100);
+    intake.move(45);
+    pros::delay(900);
     intake.move(-127);
     pros::delay(200);
     pto.set_value(true);
@@ -290,8 +288,8 @@ void ezSkills(){
     // chassis.moveToPoint(-47, 36, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
     chassis.turnToHeading(270, 1000, {}, false);
     chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
-    chassis.turnToPoint(-24, 24, 1000, {.forwards=false, .maxSpeed=80}, true);
-    chassis.moveToPoint(-24, 24, 2000, {.forwards=false, .maxSpeed=80}, true);
+    chassis.turnToPoint(-24.5, 24, 1000, {.forwards=false, .maxSpeed=80}, true);
+    chassis.moveToPoint(-24.5, 24, 2000, {.forwards=false, .maxSpeed=80}, true);
     pros::delay(800);
     matchload.set_value(true);
     chassis.turnToHeading(315, 1000, {.maxSpeed=80}, false);
@@ -299,28 +297,25 @@ void ezSkills(){
     level.set_value(false);
     left_mg.move(-60);
     right_mg.move(-60);
-    pros::delay(700);
+    pros::delay(625);
     left_mg.move(0);
     right_mg.move(0);
     // chassis.moveToPoint(-10, 10, 2000, {.forwards=false, .maxSpeed=60}, false);
     pto.set_value(false);
     gate.set_value(true);
-    pros::delay(200);
-    intake.move(45);
-    pros::delay(200);
-    intake.move(20);
-    pros::delay(1000);
-    intake.move(-127);
+    pros::delay(400);
+    intake.move(0);
+    // intake.move(25);
+    pros::delay(800);
+    // intake.move(-127);
     pros::delay(200);
     // intake.move(127);
     // pros::delay(50);
-    // intake.move(30);
-    // pros::delay(400);
-    // intake.move(-127);
-    // pros::delay(200);    
     pto.set_value(true);
-    pros::delay(100);
-    intake.move(-127);
+    //pros::delay(100);
+    int intake_speed=127;
+	pros::delay(100);
+	intake.move(-intake_speed);
     matchload.set_value(false);
     gate.set_value(false);
     
@@ -329,7 +324,7 @@ void ezSkills(){
     right_mg.move(50);
     pros::delay(100);
     // chassis.turnToPoint(-62, 18, 1000, {.forwards=true, .maxSpeed=80, .minSpeed=5, .earlyExitRange=1}, true);
-    chassis.moveToPose(-62, 18, 180, 2000, {.forwards=true, .horizontalDrift=13, .minSpeed=80}, true);
+    chassis.moveToPose(-62, 18, 180, 2000, {.forwards=true, .horizontalDrift=11.5, .minSpeed=80}, true);
     chassis.turnToHeading(180, 1000, {}, false);
     left_mg.move(70);
     right_mg.move(70);
