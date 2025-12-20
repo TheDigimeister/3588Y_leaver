@@ -11,7 +11,7 @@ const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
-int selected_auton = 2;
+int selected_auton = 6;
 bool auton_selected = false;
 
 const char* auton_names[] = {
@@ -399,9 +399,9 @@ void opcontrol() {
 
 	while (true) {
 
-		levelPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
+		levelPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
 		matchloadPressed = controller.get_digital(DIGITAL_A);
-		descorePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
+		descorePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
 
 		if (levelPressed && !prevLevelState) {
 			levelState = !levelState;
@@ -421,54 +421,70 @@ void opcontrol() {
 		prevLevelState = levelPressed;
 		prevMatchloadState = matchloadPressed;
 		prevDescoreState = descorePressed;
-
-		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+		
+		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
+		{
 			gate.set_value(false);
-			if (arm_sensor.get_position() > 100) {
-				pto.set_value(false);
-				intake.move(-100);
-			}
-			else {
-				pto.set_value(true);
-				pros::delay(100);
-				intake.move(intake_speed);
-			}
-		}
-		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			pto.set_value(true);
-			pros::delay(100);
-			intake.move(-intake_speed);
-		}
-		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			gate.set_value(true);
-			if (arm_sensor.get_position() < 11000) {
-				pto.set_value(false);
-				intake.move(intake_speed);
-			}
-			else {intake.move(0);}
-		}
-		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-			if (arm_sensor.get_position() > 100) {
+			if(arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
 				intake.move(-intake_speed);
 			}
 			else {intake.move(0);}
 		}
-		else {
-			if (arm_sensor.get_position() > 100) {
-				pto.set_value(false);
-				intake.move(-100);
-			}
-			else {intake.move(0);}
-		}
+		
+		// previous intake that sucked
+		// if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+		// 	gate.set_value(false);
+		// 	if (arm_sensor.get_position() > 100) {
+		// 		pto.set_value(false);
+		// 		intake.move(-100);
+		// 	}
+		// 	else {
+		// 		pto.set_value(true);
+		// 		pros::delay(100);
+		// 		intake_speed=127;
+		// 		intake.move(intake_speed);
+		// 	}
+		// }
+		// else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+		// 	pto.set_value(true);
+		// 	intake_speed=70;
+		// 	pros::delay(100);
+		// 	intake.move(-intake_speed);
+		// }
+		// else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+		// 	gate.set_value(true);
+		// 	if (arm_sensor.get_position() < 11000) {
+		// 		pto.set_value(false);
+		// 		intake_speed=85;
+		// 		intake.move(intake_speed);
+		// 	}
+		// 	else {intake.move(0);}
+		// }
+		// else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+		// 	gate.set_value(true);
+		// 	if (arm_sensor.get_position() < 11000) {
+		// 		pto.set_value(false);
+		// 		intake_speed=36;
+		// 		intake.move(intake_speed);
+		// 	}
+		// 	else {intake.move(0);}
+		// }
+		// else {
+		// 	if (arm_sensor.get_position() > 100) {
+		// 		pto.set_value(false);
+		// 		intake.move(-100);
+		// 	}
+		// 	else {intake.move(0);}
+		// }
 		
     	// get left y and right x positions
     	int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     	int rightX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
     	// move the robot
-    	chassis.arcade(leftY, rightX);
+    	chassis.arcade(leftY, rightX/1.6);
 
-		pros::delay(20);                               // Run for 20 ms then update
+		pros::delay(10);                               // Run for 20 ms then update
 	}
 }
