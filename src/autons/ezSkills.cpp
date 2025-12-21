@@ -110,8 +110,8 @@ void ezSkills(){
     gate.set_value(true);
     pros::delay(200);
     intake.move(100);
-    pros::delay(80);
-    intake.move(55);
+    pros::delay(100);
+    intake.move(50);
     pros::delay(800);
     // intake.move(-127);
     // pros::delay(200);
@@ -158,9 +158,8 @@ void ezSkills(){
     chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, EAST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
 
     gate.set_value(false);
-    matchload.set_value(true);
     // chassis.moveToPoint(36, -36, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
-    chassis.moveToPoint(50, 45, 2000, {.forwards=true, .maxSpeed=80, .minSpeed=80}, false);
+    chassis.moveToPoint(50, 45, 3000, {.forwards=true, .maxSpeed=80, .minSpeed=80}, false);
     chassis.turnToHeading(90, 1000, {.maxSpeed=80}, false);
     chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), chassis.getPose().theta);
     
@@ -179,6 +178,7 @@ void ezSkills(){
     intake.move(127);
     // matchload.set_value(false);
     gate.set_value(false);
+    matchload.set_value(true);
 
 
     // NE matchload
@@ -190,7 +190,7 @@ void ezSkills(){
     pros::delay(200);
     intake.move(90);
     pros::delay(100);
-    intake.move(45);
+    intake.move(40);
     pros::delay(900);
     intake.move(-127);
     pros::delay(200);
@@ -212,6 +212,7 @@ void ezSkills(){
     chassis.moveToPoint(30, 64, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127, .earlyExitRange=5}, true);
     // chassis.turnToPoint(-30, 64, 1000, {.forwards=false, .maxSpeed=80, .minSpeed=5, .earlyExitRange=1}, true);
     matchload.set_value(false);
+    intake.move(-127);
     chassis.moveToPoint(-30, 64, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
     chassis.turnToPoint(-36, 50, 1000, {.forwards=false, .maxSpeed=80, .minSpeed=5, .earlyExitRange=1}, true);
     chassis.moveToPoint(-39, 46, 2500, {.forwards=false, .maxSpeed=127}, true);
@@ -246,6 +247,7 @@ void ezSkills(){
 
     // NW matchload
     matchload.set_value(true);
+    intake.move(127);
     chassis.turnToPoint(-65, 47.25, 1000, {.forwards=true, .maxSpeed=80, .minSpeed=5, .earlyExitRange=1}, true);
     chassis.moveToPoint(-65, 47.25, 3000, {.forwards=true, .maxSpeed=55}, true);
     pros::delay(2800);
@@ -288,8 +290,8 @@ void ezSkills(){
     // chassis.moveToPoint(-47, 36, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
     chassis.turnToHeading(270, 1000, {}, false);
     chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
-    chassis.turnToPoint(-25.5, 24, 1000, {.forwards=false, .maxSpeed=80}, true);
-    chassis.moveToPoint(-25.5, 24, 2000, {.forwards=false, .maxSpeed=80}, true);
+    chassis.turnToPoint(-25, 24, 1000, {.forwards=false, .maxSpeed=80}, true);
+    chassis.moveToPoint(-25, 24, 2000, {.forwards=false, .maxSpeed=80}, true);
     pros::delay(800);
     matchload.set_value(true);
     chassis.turnToHeading(315, 1000, {.maxSpeed=80}, false);

@@ -29,17 +29,17 @@ void leftMiddleGoal(){
     chassis.setPose(chassis.getPose().x, positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
 
     // matchload
-    chassis.moveToPoint(-65, 46.5, 967, {.forwards=true, .maxSpeed=45, .minSpeed=45}, true);
-    pros::delay(967);
+    chassis.moveToPoint(-65, 46.5, 960, {.forwards=true, .maxSpeed=45, .minSpeed=45}, true);
+    pros::delay(960);
 
     //high goal
     chassis.moveToPoint(-25.3, 47.8, 1250, {.forwards=false, .maxSpeed=60}, false);
     pto.set_value(false);
     gate.set_value(true);
     pros::delay(200);
-    intake.move(127);
+    intake.move(100);
     pros::delay(50);
-    intake.move(64);
+    intake.move(60);
     pros::delay(700);
     intake.move(-127);
     pros::delay(100);
@@ -56,10 +56,10 @@ void leftMiddleGoal(){
     chassis.moveToPoint(-11.5, 18, 2000, {.forwards=true, .maxSpeed=90}, true);
     level.set_value(false);
     pros::delay(100);
-    chassis.turnToHeading(320,2000, {.maxSpeed=80}, false);
+    chassis.turnToHeading(315,2000, {.maxSpeed=80}, false);
     right_mg.move(-60);
     left_mg.move(-60);
-    pros::delay(380);
+    pros::delay(400);
     intake.move(0);
     right_mg.move(0);
     left_mg.move(0);
@@ -86,7 +86,7 @@ void leftMiddleGoal(){
     // left_mg.move(80);
     // right_mg.move(80);
     // pros::delay(1000);
-    chassis.moveToPose(-5, 38, 90, 2000, {.maxSpeed=80});
+    chassis.moveToPose(-5, 38, 90, 2000, {.maxSpeed=100});
     chassis.turnToHeading(115, 2000, {}, false);
 
 }

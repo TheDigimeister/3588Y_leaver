@@ -438,14 +438,14 @@ void opcontrol() {
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			pto.set_value(true);
 			intake_speed=70;
-			pros::delay(45);
+			pros::delay(30);
 			intake.move(-intake_speed);
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
-				intake_speed=60;
+				intake_speed=55;
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
@@ -454,7 +454,7 @@ void opcontrol() {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
-				intake_speed=50;
+				intake_speed=45;
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
@@ -463,7 +463,7 @@ void opcontrol() {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
-				intake_speed=35;
+				intake_speed=30;
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
