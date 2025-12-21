@@ -16,7 +16,7 @@ void ezSkills(){
 
     // SW matchload
     matchload.set_value(true);
-    chassis.moveToPoint(-50, -52, 2000, {.forwards=true, .maxSpeed=127}, true);
+    chassis.moveToPoint(-50.5, -52, 2000, {.forwards=true, .maxSpeed=127}, true);
 
     chassis.turnToHeading(270, 1000, {}, false);
     chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
@@ -46,7 +46,7 @@ void ezSkills(){
     //     while(matchload_right.get_proximity() < )
     // })
 
-    chassis.moveToPoint(-67, -48.25, 2000, {.forwards=true, .maxSpeed=55}, true);
+    chassis.moveToPoint(-67.1, -48.25, 2000, {.forwards=true, .maxSpeed=55}, true);
     pros::delay(2800);
     // left_mg.move(-50);
     // right_mg.move(-50);
@@ -92,7 +92,7 @@ void ezSkills(){
     
     // SE matchload
     matchload.set_value(true);
-    chassis.turnToPoint(65, -48, 1000, {.forwards=true, .maxSpeed=80, .minSpeed=5, .earlyExitRange=1}, true);
+    chassis.turnToPoint(65, -48, 1000, {.forwards=true, .maxSpeed=80}, true);
     chassis.moveToPoint(65, -48, 3000, {.forwards=true, .maxSpeed=55}, true);
     pros::delay(2800);
     // left_mg.move(-50);
@@ -246,8 +246,8 @@ void ezSkills(){
 
     // NW matchload
     matchload.set_value(true);
-    chassis.turnToPoint(-65, 47, 1000, {.forwards=true, .maxSpeed=80, .minSpeed=5, .earlyExitRange=1}, true);
-    chassis.moveToPoint(-65, 47, 3000, {.forwards=true, .maxSpeed=55}, true);
+    chassis.turnToPoint(-65, 47.25, 1000, {.forwards=true, .maxSpeed=80, .minSpeed=5, .earlyExitRange=1}, true);
+    chassis.moveToPoint(-65, 47.25, 3000, {.forwards=true, .maxSpeed=55}, true);
     pros::delay(2800);
     // left_mg.move(-50);
     // right_mg.move(-50);
