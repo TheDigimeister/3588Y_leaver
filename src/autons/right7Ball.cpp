@@ -43,7 +43,8 @@ void right7Ball(){
     pros::delay(200);
     intake.move(127);
     pros::delay(50);
-    intake.move(64);
+    intake.move(80);
+    //intake speed was 64
     pros::delay(800);
     intake.move(-127);
     pros::delay(200);

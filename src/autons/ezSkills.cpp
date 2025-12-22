@@ -299,7 +299,7 @@ void ezSkills(){
     level.set_value(false);
     left_mg.move(-60);
     right_mg.move(-60);
-    pros::delay(625);
+    pros::delay(725);
     left_mg.move(0);
     right_mg.move(0);
     intake.move(40);
@@ -330,7 +330,7 @@ void ezSkills(){
     chassis.turnToHeading(180, 1000, {}, false);
     left_mg.move(70);
     right_mg.move(70);
-    pros::delay(1550);
+    pros::delay(1400);
     left_mg.move(0);
     right_mg.move(0);
 

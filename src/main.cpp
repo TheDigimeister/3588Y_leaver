@@ -11,7 +11,7 @@ const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
-int selected_auton = 6;
+int selected_auton = 4;
 bool auton_selected = false;
 
 const char* auton_names[] = {
@@ -437,7 +437,7 @@ void opcontrol() {
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			pto.set_value(true);
-			intake_speed=70;
+			intake_speed=40;
 			pros::delay(30);
 			intake.move(-intake_speed);
 		}
@@ -445,7 +445,8 @@ void opcontrol() {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
-				intake_speed=55;
+				intake_speed=127;
+				//intake speed should be 55 for skills
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
@@ -454,7 +455,8 @@ void opcontrol() {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
 				pto.set_value(false);
-				intake_speed=45;
+				intake_speed=40;
+				//intake speed should be 40 for skills
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}

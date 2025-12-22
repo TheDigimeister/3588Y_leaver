@@ -57,10 +57,10 @@ void rightLowGoal() {
     intake.move(127);
 
     //descore
-    chassis.turnToPoint(-34, -40.5, 2000, {.forwards=false, .maxSpeed=127,.minSpeed=5,.earlyExitRange=5}, true);
-    chassis.moveToPoint(-34, -40.5, 2000, {.forwards=false, .maxSpeed=127}, true);
-    chassis.turnToPoint(-6, -41.1, 2000, {.forwards=true, .maxSpeed=80}, true);
-    chassis.moveToPoint(-6, -41.1, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
+    chassis.turnToPoint(-34, -41.1, 2000, {.forwards=false, .maxSpeed=127,.minSpeed=5,.earlyExitRange=5}, true);
+    chassis.moveToPoint(-34, -41.1, 2000, {.forwards=false, .maxSpeed=127}, true);
+    chassis.turnToPoint(-6, -42, 2000, {.forwards=true, .maxSpeed=80}, true);
+    chassis.moveToPoint(-6, -42, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
     chassis.turnToHeading(70, 2000, {}, false);
 
 }
