@@ -5,13 +5,14 @@
 #include "pros/misc.h"
 #include "pros/motors.h"
 #include "pros/optical.h"
+#include "utils.hpp"
 
 
 const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90°/270° 
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
-int selected_auton = 4;
+int selected_auton = 8;
 bool auton_selected = false;
 
 const char* auton_names[] = {
@@ -22,7 +23,8 @@ const char* auton_names[] = {
 	"Right Low Goal",
     "Skills",
 	"EZ Skills",
-	"PID Tune"
+	"PID Tune",
+	"rightLowhook7"
 };
 
 /**
@@ -356,6 +358,9 @@ void autonomous() {
 		case 7:
 			pidTune();
 			break;
+		case 8:
+			rightLowhook7();
+			break;
 	}
 }
 
@@ -417,6 +422,40 @@ void opcontrol() {
 			descoreState = !descoreState;
 			descore.set_value(descoreState);
 		}
+		
+		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_B))
+		{
+			descore.set_value(false);
+			descoreState=false;
+			prevDescoreState=true;
+			float current_heading = normalizeAngle(chassis.getPose().theta);
+			float error90=fabs(current_heading-90);
+			float error270=fabs(current_heading-270);
+			if(error90>error270)
+			{
+				chassis.turnToHeading(270, 500,{},false);
+				left_mg.move(50);
+				right_mg.move(50);
+				pros::delay(150);
+				chassis.turnToHeading(340, 500,{.minSpeed=5, .earlyExitRange=1},false);
+				left_mg.move(-50);
+				right_mg.move(-50);
+				pros::delay(410);
+				chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+			}
+			else 
+			{
+				chassis.turnToHeading(90, 500,{.minSpeed=5,.earlyExitRange=1},false);
+				left_mg.move(50);
+				right_mg.move(50);
+				pros::delay(150);
+				chassis.turnToHeading(160, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+				left_mg.move(-50);
+				right_mg.move(-50);
+				pros::delay(410);
+				chassis.turnToHeading(90,500,{.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+			}
+		}
 
 		prevLevelState = levelPressed;
 		prevMatchloadState = matchloadPressed;
@@ -451,6 +490,7 @@ void opcontrol() {
 			}
 			else {intake.move(0);}
 		}
+		
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
