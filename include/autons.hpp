@@ -7,3 +7,4 @@ extern void leftMiddleGoal();
 extern void right7Ball();
 extern void rightLowGoal();
 extern void ezSkills();
+extern void rightLowhook7();
