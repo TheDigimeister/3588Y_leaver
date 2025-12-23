@@ -433,25 +433,23 @@ void opcontrol() {
 			float error270=fabs(current_heading-270);
 			if(error90>error270)
 			{
-				chassis.turnToHeading(270, 500, {},false);
 				left_mg.move(50);
 				right_mg.move(50);
 				pros::delay(150);
 				chassis.turnToHeading(160, 500, {.minSpeed=5, .earlyExitRange=1},false);
-				left_mg.move(80);
-				right_mg.move(80);
+				left_mg.move(75);
+				right_mg.move(75);
 				pros::delay(415);
 				chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
 			else 
 			{
-				chassis.turnToHeading(90, 500, {.minSpeed=5,.earlyExitRange=1},false);
 				left_mg.move(50);
 				right_mg.move(50);
 				pros::delay(150);
 				chassis.turnToHeading(340, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
-				left_mg.move(80);
-				right_mg.move(80);
+				left_mg.move(75);
+				right_mg.move(75);
 				pros::delay(415);
 				chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
