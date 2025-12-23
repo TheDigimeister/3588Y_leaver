@@ -17,66 +17,50 @@ void rightLowhook7()
 
 
     //to matchload
-    // chassis.turnToPoint(-50, -47, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
-    // chassis.moveToPoint(-53, -46, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
-    // chassis.turnToHeading(270, 500, {}, false);
-    // chassis.setPose(chassis.getPose().x, positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
+    chassis.turnToPoint(-50, -47, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
+    chassis.moveToPoint(-53, -46, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
+    chassis.turnToHeading(270, 500, {}, false);
+    chassis.setPose(chassis.getPose().x, positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
     //matchload
-    // chassis.moveToPoint(-65, -47.5, 960, {.forwards=true, .maxSpeed=45, .minSpeed=45}, true);
-    // pros::delay(960);
-    // chassis.turnToPoint(-25, -47, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
+    chassis.moveToPoint(-65, -47.5, 960, {.forwards=true, .maxSpeed=45, .minSpeed=45}, true);
+    pros::delay(960);
+    chassis.turnToPoint(-25, -47, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
+    left_mg.move(-127);
+    right_mg.move(-127);
+    pros::delay(200);  
+    left_mg.move(0);
+    right_mg.move(0);
+    matchload.set_value(false);
+    pros::delay(100);
 
-    //high goal
-    // chassis.moveToPoint(-25.4, -47.6, 1500, {.forwards=false, .maxSpeed=50, .minSpeed=5}, false);
-    // pto.set_value(false);
-    // gate.set_value(true);
-    // pros::delay(200);
-    // intake.move(100);
-    // pros::delay(50);
-    // intake.move(60);
-    // pros::delay(800);
-    // intake.move(-127);
-    // pros::delay(200);
-    // pto.set_value(true);
-    // pros::delay(100);
-    // intake.move(127);
-    // gate.set_value(false);
-    // matchload.set_value(false);
 
     //low goal
     // chassis.turnToPoint(-40.5, -47, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5, .earlyExitRange=5}, true);
-    
+
     chassis.turnToPoint(-24, -22, 2000, {.forwards=true, .maxSpeed=80, .minSpeed=5, .earlyExitRange=5}, true);
     chassis.moveToPoint(-24, -22, 2000, {.forwards=true, .maxSpeed=90}, true);
-
-    left_mg.move(80);
-    right_mg.move(80);
-    pros::delay(700);
-    left_mg.move(0);
-    right_mg.move(0);
-
-    
     // chassis.moveToPoint(-19, -16, 2000, {.forwards=true, .maxSpeed=40}, false);
     // chassis.turnToPoint( 13.25, -13.25, 1000, {.forwards=true,.maxSpeed=80});
-    chassis.turnToPoint(-12, -13, 1000,{.forwards=true,.maxSpeed=50},false);
-    chassis.moveToPoint(-12, -13, 1000, {.forwards=true, .maxSpeed=40}, false);
+    chassis.moveToPoint(-11, -12, 2000, {.forwards=true, .maxSpeed=40}, false);
     pros::delay(100);
-    intake.move(-55);    
-    pros::delay(1000);
-    descore.set_value(false);
-    pros::delay(100);
+    intake.move(-50);    
+    pros::delay(3000);
     intake.move(127);
 
     //descore
-    // chassis.turnToPoint(-39, -42, 2000, {.forwards=false, .maxSpeed=127,.minSpeed=5,.earlyExitRange=5}, true);
-    // chassis.moveToPoint(-39, -42, 2000, {.forwards=false, .maxSpeed=127}, true);
-    // chassis.turnToPoint(-6, -42, 2000, {.forwards=true, .maxSpeed=80}, false);
-    // left_mg.move(120);
-    // right_mg.move(120);
-    // pros::delay(425);
-    // left_mg.move(0);
-    // right_mg.move(0);
-    // chassis.turnToHeading(70, 2000, {}, false);
+    chassis.turnToPoint(-39, -42, 2000, {.forwards=false, .maxSpeed=127,.minSpeed=5,.earlyExitRange=5}, true);
+    chassis.moveToPoint(-39, -42, 2000, {.forwards=false, .maxSpeed=127}, true);
+    chassis.turnToPoint(-6, -42, 2000, {.forwards=true, .maxSpeed=80}, false);
+    left_mg.move(120);
+    right_mg.move(120);
+    pros::delay(425);
+    descore.set_value(false);
+    pros::delay(100);
+    left_mg.move(-120);
+    right_mg.move(-120);
+    pros::delay(425);
+    left_mg.move(0);
+    right_mg.move(0);
 
 }
