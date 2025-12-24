@@ -439,7 +439,7 @@ void opcontrol() {
 				chassis.turnToHeading(160, 500, {.minSpeed=5, .earlyExitRange=1},false);
 				left_mg.move(75);
 				right_mg.move(75);
-				pros::delay(415);
+				pros::delay(350);
 				chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
 			else 
@@ -450,8 +450,39 @@ void opcontrol() {
 				chassis.turnToHeading(340, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 				left_mg.move(75);
 				right_mg.move(75);
-				pros::delay(415);
+				pros::delay(350);
 				chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+			}
+		}
+		else if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
+		{
+			descore.set_value(false);
+			descoreState=false;
+			prevDescoreState=true;
+			float current_heading = normalizeAngle(chassis.getPose().theta);
+			float error90=fabs(current_heading-90);
+			float error270=fabs(current_heading-270);
+			if(error90>error270)
+			{
+				left_mg.move(50);
+				right_mg.move(50);
+				pros::delay(160);
+				chassis.turnToHeading(220, 500, {.minSpeed=5, .earlyExitRange=1},false);
+				left_mg.move(-75);
+				right_mg.move(-75);
+				pros::delay(310);
+				chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+			}
+			else 
+			{
+				left_mg.move(50);
+				right_mg.move(50);
+				pros::delay(160);
+				chassis.turnToHeading(20, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+				left_mg.move(-75);
+				right_mg.move(-75);
+				pros::delay(310);
+				chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
 		}
 		prevLevelState = levelPressed;
@@ -461,27 +492,26 @@ void opcontrol() {
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			gate.set_value(false);
 			if (arm_sensor.get_position() > 200) {
-				pto.set_value(false);
+				pto.set_value(true);
 				intake.move(-100);
 			}
 			else {
-				pto.set_value(true);
+				pto.set_value(false);
 				pros::delay(50);
 				intake_speed=127;
 				intake.move(intake_speed);
 			}
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			pto.set_value(true);
-			intake_speed=40;
-			pros::delay(30);
+			pto.set_value(false);
+			intake_speed=39;
 			intake.move(-intake_speed);
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
-				pto.set_value(false);
-				intake_speed=127;
+				pto.set_value(true);
+				intake_speed=56;
 				//intake speed should be 55 for skills
 				intake.move(intake_speed);
 			}
@@ -490,31 +520,31 @@ void opcontrol() {
 		
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			gate.set_value(true);
-			if (arm_sensor.get_position() < 11000) {
-				pto.set_value(false);
-				intake_speed=40;
-				//intake speed should be 40 for skills
+			if (arm_sensor.get_position() < 11100) {
+				pto.set_value(true);
+				intake_speed=35;
+				//intake speed should be 35 for skills
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
 		}
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
 			gate.set_value(true);
-			if (arm_sensor.get_position() < 11000) {
-				pto.set_value(false);
-				intake_speed=30;
+			if (arm_sensor.get_position() < 11100) {
+				pto.set_value(true);
+				intake_speed=25;
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
 		}
 		else {
-			if (arm_sensor.get_position() > 200) {
-				pto.set_value(false);
+			if (arm_sensor.get_position() > 250) {
+				pto.set_value(true);
 				intake.move(-100);
 			}
 			else {
 				intake.move(0);
-				pto.set_value(true);
+				pto.set_value(false);
 			}
 		}
 		
