@@ -439,7 +439,7 @@ void opcontrol() {
 				chassis.turnToHeading(160, 500, {.minSpeed=5, .earlyExitRange=1},false);
 				left_mg.move(75);
 				right_mg.move(75);
-				pros::delay(350);
+				pros::delay(340);
 				chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
 			else 
@@ -470,7 +470,7 @@ void opcontrol() {
 				chassis.turnToHeading(220, 500, {.minSpeed=5, .earlyExitRange=1},false);
 				left_mg.move(-75);
 				right_mg.move(-75);
-				pros::delay(310);
+				pros::delay(290);
 				chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
 			else 
@@ -481,7 +481,7 @@ void opcontrol() {
 				chassis.turnToHeading(20, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 				left_mg.move(-75);
 				right_mg.move(-75);
-				pros::delay(310);
+				pros::delay(180);
 				chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
 		}
