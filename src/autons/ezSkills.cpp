@@ -113,12 +113,6 @@ void ezSkills(){
     pros::delay(100);
     intake.move(50);
     pros::delay(800);
-    // intake.move(-127);
-    // pros::delay(200);
-    // intake.move(127);
-    // pros::delay(100);
-    // intake.move(60);
-    // pros::delay(300);
     intake.move(-127);
     pros::delay(200);    
     pto.set_value(true);

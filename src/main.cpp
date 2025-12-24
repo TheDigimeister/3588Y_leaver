@@ -12,7 +12,7 @@ const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
-int selected_auton = 8;
+int selected_auton = 9;
 bool auton_selected = false;
 
 const char* auton_names[] = {
@@ -24,7 +24,8 @@ const char* auton_names[] = {
     "Skills",
 	"EZ Skills",
 	"PID Tune",
-	"rightLowhook7"
+	"rightLowhook7",
+	"96 skills"
 };
 
 /**
@@ -360,6 +361,9 @@ void autonomous() {
 			break;
 		case 8:
 			rightLowhook7();
+			break;
+		case 9:
+			testing();
 			break;
 	}
 }
