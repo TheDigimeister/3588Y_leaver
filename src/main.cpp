@@ -552,16 +552,15 @@ void opcontrol() {
 			// else {intake.move(0);}
 			gate.set_value(true);
 			pto.set_value(true);
-			intake.move(38);
-			pros::delay(945);
+			intake.move(30);
+			pros::delay(1100);
 			intake.move(-127);
 			pros::delay(150);
-			intake.move(30);
 			while(arm_sensor.get_position()<11800){
-				intake.move(28);
+				intake.move(25);
 				cnt++;
 				pros::delay(10);
-				if(cnt>190)
+				if(cnt>170)
 				{
 					break;
 				}

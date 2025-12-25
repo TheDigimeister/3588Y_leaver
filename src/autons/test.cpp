@@ -61,7 +61,7 @@ void testing(){
     level.set_value(true);
     pros::delay(100);
     chassis.turnToHeading(270, 2000, {.maxSpeed=70},false);
-    chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
+    chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), chassis.getPose().theta);
 
 
     //goes inside matchload
@@ -81,12 +81,52 @@ void testing(){
     intake.move(0);
     pros::delay(100);
     chassis.moveToPoint(42, 60, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127, .earlyExitRange=5}, false);
-    chassis.turnToHeading(270, 2000, {.maxSpeed=80}, false);
+    chassis.turnToHeading(90, 2000, {.maxSpeed=80}, false);
     chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, WEST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
-    chassis.moveToPose(34, 27, 270, 2000, {.forwards=false,.maxSpeed=127}, true);
+    chassis.moveToPose(40, 47, 90, 2000, {.forwards=true,.maxSpeed=127}, true);
+    chassis.moveToPoint(25, 47, 1200, {.forwards=false, .maxSpeed=55}, false);
 
 
     //scoring
 
+    pto.set_value(false);
+    gate.set_value(true);
+    pros::delay(200);
+    intake.move(90);
+    pros::delay(100);
+    intake.move(55);
+    pros::delay(900);
+    intake.move(-127);
+    pros::delay(200);
+    pto.set_value(true);
+    gate.set_value(false);
+    matchload.set_value(true);
+    pros::delay(100);
+    intake.move(127);
+
+    
+    //matchload
+
+    chassis.moveToPoint(65, 48.5, 2000, {.forwards=true, .maxSpeed=55}, true);
+    pros::delay(2800);
+    chassis.moveToPoint(25, 48, 2000, {.forwards=false, .maxSpeed=55}, false);
+
+    
+    //scoring
+    
+    pto.set_value(false);
+    gate.set_value(true);
+    pros::delay(200);
+    intake.move(90);
+    pros::delay(100);
+    intake.move(40);
+    pros::delay(900);
+    intake.move(-127);
+    pros::delay(200);
+    pto.set_value(true);
+    pros::delay(100);
+    intake.move(127);
+    // matchload.set_value(false);
+    gate.set_value(false);
 
 }
