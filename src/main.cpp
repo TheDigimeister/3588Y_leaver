@@ -408,6 +408,8 @@ void opcontrol() {
 
 	while (true) {
 
+		int cnt=0;
+
 		levelPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
 		matchloadPressed = controller.get_digital(DIGITAL_A);
 		descorePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
@@ -440,10 +442,10 @@ void opcontrol() {
 				left_mg.move(50);
 				right_mg.move(50);
 				pros::delay(150);
-				chassis.turnToHeading(160, 500, {.minSpeed=5, .earlyExitRange=1},false);
+				chassis.turnToHeading(340, 500, {.minSpeed=5, .earlyExitRange=1},false);
 				left_mg.move(75);
 				right_mg.move(75);
-				pros::delay(340);
+				pros::delay(350);
 				chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
 			else 
@@ -451,7 +453,7 @@ void opcontrol() {
 				left_mg.move(50);
 				right_mg.move(50);
 				pros::delay(150);
-				chassis.turnToHeading(340, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+				chassis.turnToHeading(160, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 				left_mg.move(75);
 				right_mg.move(75);
 				pros::delay(350);
@@ -470,23 +472,23 @@ void opcontrol() {
 			{
 				left_mg.move(50);
 				right_mg.move(50);
-				pros::delay(160);
-				chassis.turnToHeading(220, 500, {.minSpeed=5, .earlyExitRange=1},false);
+				pros::delay(170);
+				chassis.turnToHeading(20, 500, {.minSpeed=5, .earlyExitRange=1},false);
 				left_mg.move(-75);
 				right_mg.move(-75);
-				pros::delay(290);
+				pros::delay(285);
 				chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 			}
 			else 
 			{
 				left_mg.move(50);
 				right_mg.move(50);
-				pros::delay(160);
-				chassis.turnToHeading(20, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+				pros::delay(170);
+				chassis.turnToHeading(220, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
 				left_mg.move(-75);
 				right_mg.move(-75);
-				pros::delay(180);
-				chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+				pros::delay(285);
+				chassis.turnToHeading(90, 500, {.maxSpeed=100,.minSpeed=40,.earlyExitRange=1},false);
 			}
 		}
 		prevLevelState = levelPressed;
@@ -518,7 +520,7 @@ void opcontrol() {
 		//high goal
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			gate.set_value(true);
-			if (arm_sensor.get_position() < 11000) {
+			if (arm_sensor.get_position() < 11500) {
 				pto.set_value(true);
 				intake_speed=56;
 				//intake speed should be 55 for skills
@@ -530,7 +532,7 @@ void opcontrol() {
 		//middle goal
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			gate.set_value(true);
-			if (arm_sensor.get_position() < 11100) {
+			if (arm_sensor.get_position() < 11500) {
 				pto.set_value(true);
 				intake_speed=40;
 				//intake speed should be 40 for skills
@@ -551,13 +553,18 @@ void opcontrol() {
 			gate.set_value(true);
 			pto.set_value(true);
 			intake.move(38);
-			pros::delay(950);
+			pros::delay(945);
 			intake.move(-127);
 			pros::delay(150);
 			intake.move(30);
-			while(arm_sensor.get_position()<11700){
+			while(arm_sensor.get_position()<11800){
 				intake.move(28);
-				pros::delay(20);
+				cnt++;
+				pros::delay(10);
+				if(cnt>190)
+				{
+					break;
+				}
 			}
 			intake.move(0);
 		}
