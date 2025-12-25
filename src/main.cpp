@@ -493,6 +493,7 @@ void opcontrol() {
 		prevMatchloadState = matchloadPressed;
 		prevDescoreState = descorePressed;
 
+		//intake
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			gate.set_value(false);
 			if (arm_sensor.get_position() > 200) {
@@ -506,11 +507,15 @@ void opcontrol() {
 				intake.move(intake_speed);
 			}
 		}
+
+		//low goal outtake
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			pto.set_value(false);
 			intake_speed=39;
 			intake.move(-intake_speed);
 		}
+
+		//high goal
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11000) {
@@ -522,24 +527,39 @@ void opcontrol() {
 			else {intake.move(0);}
 		}
 		
+		//middle goal
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11100) {
 				pto.set_value(true);
-				intake_speed=35;
-				//intake speed should be 35 for skills
+				intake_speed=40;
+				//intake speed should be 40 for skills
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
 		}
+
+		//auto middle goal
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+			// gate.set_value(true);
+			// if (arm_sensor.get_position() < 11100) {
+			// 	pto.set_value(true);
+			// 	intake_speed=27;
+			// 	intake.move(intake_speed);
+			// }
+			// else {intake.move(0);}
 			gate.set_value(true);
-			if (arm_sensor.get_position() < 11100) {
-				pto.set_value(true);
-				intake_speed=25;
-				intake.move(intake_speed);
+			pto.set_value(true);
+			intake.move(38);
+			pros::delay(950);
+			intake.move(-127);
+			pros::delay(150);
+			intake.move(30);
+			while(arm_sensor.get_position()<11700){
+				intake.move(28);
+				pros::delay(20);
 			}
-			else {intake.move(0);}
+			intake.move(0);
 		}
 		else {
 			if (arm_sensor.get_position() > 250) {
@@ -557,7 +577,7 @@ void opcontrol() {
     	int rightX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
     	// move the robot
-    	chassis.arcade(leftY, rightX/1.62);
+    	chassis.arcade(leftY, rightX/1.61);
 
 		pros::delay(10);                               // Run for 20 ms then update
 	}
