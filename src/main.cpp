@@ -513,7 +513,7 @@ void opcontrol() {
 		//low goal outtake
 		else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			pto.set_value(false);
-			intake_speed=39;
+			intake_speed=36;
 			intake.move(-intake_speed);
 		}
 
@@ -552,12 +552,15 @@ void opcontrol() {
 			// else {intake.move(0);}
 			gate.set_value(true);
 			pto.set_value(true);
-			intake.move(30);
-			pros::delay(1100);
+			pros::delay(500);
+			intake.move(127);
+			pros::delay(100);
+			intake.move(28);
+			pros::delay(910);
 			intake.move(-127);
-			pros::delay(150);
+			pros::delay(110);
 			while(arm_sensor.get_position()<11800){
-				intake.move(25);
+				intake.move(23);
 				cnt++;
 				pros::delay(10);
 				if(cnt>170)
