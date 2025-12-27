@@ -17,12 +17,16 @@ void testing(){
 
 
     //get the four balls
-    chassis.turnToPoint(-23.1, 24, 500, {.forwards=true, .maxSpeed=90, .minSpeed=5},true);
-    chassis.moveToPoint(-23.1, 24, 2000, {.forwards=true, .maxSpeed=80},false);
+    chassis.turnToPoint(-23, 24, 500, {.forwards=true, .maxSpeed=90, .minSpeed=5},true);
+    chassis.moveToPoint(-23, 24, 2000, {.forwards=true, .maxSpeed=80},false);
+    
+    left_mg.move(-50);
+    right_mg.move(-50);
+    pros::delay(50);
 
 
     //turn around to middle goal
-    chassis.turnToHeading(318, 700, {.maxSpeed=80,.minSpeed=5},false);
+    chassis.turnToHeading(315, 700, {.maxSpeed=80,.minSpeed=5},false);
 
     left_mg.move(-80);
     right_mg.move(-80);
@@ -37,10 +41,8 @@ void testing(){
     gate.set_value(true);
     intake.move(0);
     pros::delay(200);
-    intake.move(43);
-    pros::delay(50);
-    intake.move(38);
-    pros::delay(1000);
+    intake.move(45);
+    pros::delay(950);
     intake.move(-127);
     pros::delay(200);
     intake.move(0);
@@ -48,7 +50,7 @@ void testing(){
     
     //goes to matchload #1
 
-    chassis.moveToPoint(-53, 47.5, 1500, {.forwards=true, .maxSpeed=80}, true);
+    chassis.moveToPoint(-53, 47.6, 1500, {.forwards=true, .maxSpeed=85}, true);
     chassis.waitUntil(8);
     intake.move(0);
     pto.set_value(false);
@@ -62,8 +64,17 @@ void testing(){
     //goes inside matchload #1
 
     intake.move(127);
-    chassis.moveToPoint(-67, 48.5, 2300, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
-    pros::delay(2300);
+    chassis.moveToPoint(-67, 48.5, 2200, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
+    pros::delay(2200);
+    left_mg.move(-80);
+    right_mg.move(-80);
+    pros::delay(100);
+    left_mg.move(127);
+    right_mg.move(127);
+    pros::delay(120);
+    left_mg.move(0);
+    right_mg.move(0);
+    pros::delay(1290);
 
 
     //going to score
@@ -76,22 +87,21 @@ void testing(){
     pros::delay(100);
     chassis.moveToPoint(28, 60, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127, .earlyExitRange=5}, true);
     
-    chassis.turnToHeading(0, 2000, {.maxSpeed=80,.minSpeed=20}, true);
-    chassis.moveToPoint(26, 44, 2000, {.forwards=false,.maxSpeed=100},true);
-    chassis.turnToHeading(90, 2000, {.maxSpeed=80},false);
+    chassis.turnToHeading(0, 2000, {.maxSpeed=80}, true);
+    chassis.moveToPoint(26, 46, 2000, {.forwards=false,.maxSpeed=100},true);
+    chassis.turnToHeading(90, 2000, {.maxSpeed=70},false);
 
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), chassis.getPose().theta);
     
-    chassis.moveToPoint(25, 47, 1200, {.forwards=false, .maxSpeed=55}, false);
-
 
     //scoring #1
 
+    chassis.moveToPoint(27, 48.5, 650, {.forwards=false, .maxSpeed=75}, false);
     gate.set_value(true);
     pros::delay(200);
-    intake.move(95);
+    intake.move(100);
     pros::delay(120);
-    intake.move(50);
+    intake.move(52);
     pros::delay(860);
     intake.move(-127);
     pros::delay(200);
@@ -104,20 +114,21 @@ void testing(){
     
     //matchload #2
 
-    chassis.moveToPoint(65, 47.9, 2700, {.forwards=true, .maxSpeed=80}, true);
-    pros::delay(2700);
+    chassis.moveToPoint(65, 47.9, 2600, {.forwards=true, .maxSpeed=80}, true);
+    pros::delay(2600);
 
 
     //scoring #2
     
-    chassis.moveToPoint(25, 48, 2000, {.forwards=false, .maxSpeed=70}, false);
+    chassis.moveToPoint(27, 48.5, 1400, {.forwards=false, .maxSpeed=75}, false);
     pto.set_value(true);
     gate.set_value(true);
+    intake.move(0);
     pros::delay(200);
-    intake.move(80);
-    pros::delay(60);
-    intake.move(35);
-    pros::delay(1000);
+    intake.move(95);
+    pros::delay(80);
+    intake.move(50);
+    pros::delay(960);
     intake.move(-127);
     pros::delay(200);
     intake.move(0);
@@ -127,21 +138,20 @@ void testing(){
 
     //clear parking
 
-    chassis.moveToPose(68, 12, 180, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=90},true);
+    chassis.moveToPose(68, 12, 180, 1500, {.forwards=true, .maxSpeed=127, .minSpeed=127},true);
     chassis.waitUntil(3);
     intake.move(127);
-    pros::delay(250);
+    pros::delay(300);
     intake.move(-127);
-    pros::delay(250);
+    pros::delay(400);
     intake.move(0);
     pto.set_value(false);
     gate.set_value(false);
     level.set_value(false);
     intake.move(127);
-    pros::delay(1490);
+    pros::delay(900);
 
 
-    pros::delay(300);
     left_mg.move(62);
     right_mg.move(62);
     pros::delay(3100);
@@ -173,15 +183,15 @@ void testing(){
     gate.set_value(true);
     int cnt=0;
 	pros::delay(500);
-	intake.move(30);
-	pros::delay(910);
+	intake.move(35);
+	pros::delay(800);
 	intake.move(-127);
-	pros::delay(110);
-	while(arm_sensor.get_position()<11800){
-		intake.move(25);
+	pros::delay(165);
+	while(arm_sensor.get_position()<11900){
+		intake.move(26);
 		cnt++;
 		pros::delay(10);
-		if(cnt>170)
+		if(cnt>195)
 		{
 			break;
 		}
@@ -194,34 +204,42 @@ void testing(){
 
     //going near matchload #3
 
-    chassis.moveToPoint(48, -45, 2000, {.forwards=true, .maxSpeed=80}, true);
+    chassis.moveToPoint(48, -44.75, 2000, {.forwards=true, .maxSpeed=100}, true);
     chassis.waitUntil(10);
     gate.set_value(false);
     matchload.set_value(true);
     level.set_value(true);
     intake.move(127);
-    chassis.turnToHeading(90, 2000, {.maxSpeed=85,.minSpeed=5},false);
+    chassis.turnToHeading(90, 2000, {.maxSpeed=85},false);
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
 
     //going into matchload #3
     
     // chassis.turnToPoint(65, -48.4, 1000, {.forwards=true, .maxSpeed=80}, true);
-    chassis.moveToPoint(67, -48.4, 2300, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
-    pros::delay(2300);
+    chassis.moveToPoint(67, -48, 2200, {.forwards=true, .maxSpeed=127,.minSpeed=55}, true);
+    pros::delay(2200);
+    left_mg.move(-80);
+    right_mg.move(-80);
+    pros::delay(100);
+    left_mg.move(127);
+    right_mg.move(127);
+    pros::delay(120);
+    left_mg.move(0);
+    right_mg.move(0);
+    pros::delay(1290);
 
 
     //going to score #3
 
     chassis.moveToPoint(30, -64, 2000, {.forwards=false,.maxSpeed=127,.minSpeed=127,.earlyExitRange=5},true);
-    
+
     chassis.moveToPoint(-25, -64, 2000, {.forwards=false,.maxSpeed=127,.minSpeed=127},true);
-    chassis.waitUntil(10);
     intake.move(0);
+    chassis.waitUntil(10);
     matchload.set_value(false);
     pto.set_value(true);
-    intake.move(0);
-    chassis.turnToHeading(180, 2000, {.maxSpeed=80,.minSpeed=5},false);
+    chassis.turnToHeading(180, 2000, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=0.5},false);
     // chassis.moveToPoint(-26, -43, 2000,{.forwards=false,.maxSpeed=100,.minSpeed=5},false);
     left_mg.move(-90);
     right_mg.move(-90);
@@ -232,13 +250,13 @@ void testing(){
 
     //score #3
 
-    chassis.moveToPoint(-25, -49, 2000, {.forwards=false, .maxSpeed=65}, false);
+    chassis.moveToPoint(-27, -49, 800, {.forwards=false, .maxSpeed=70}, false);
     gate.set_value(true);
     pros::delay(100);
     intake.move(90);
     pros::delay(80);
-    intake.move(35);
-    pros::delay(1000);
+    intake.move(50);
+    pros::delay(950);
     intake.move(-127);
     pros::delay(250);
     pto.set_value(false);
@@ -250,21 +268,22 @@ void testing(){
 
     //matchload #4
 
-    chassis.moveToPoint(-67.1, -48.25, 1700, {.forwards=true, .maxSpeed=55}, false);
-    pros::delay(1700);
-    chassis.moveToPoint(-25, -49, 2000, {.forwards=false, .maxSpeed=70, .minSpeed=10},false);
-    pto.set_value(true);
-    matchload.set_value(false);
+    chassis.moveToPoint(-67.1, -48.25, 1400, {.forwards=true, .maxSpeed=65}, false);
+    pros::delay(1400);
 
     
     //scoring #4
 
+    chassis.moveToPoint(-27, -49, 1600, {.forwards=false, .maxSpeed=75},false);
+    pto.set_value(true);
+    matchload.set_value(false);
     gate.set_value(true);
+    intake.move(0);
     pros::delay(300);
-    intake.move(85);
-    pros::delay(60);
-    intake.move(35);
-    pros::delay(1050);
+    intake.move(100);
+    pros::delay(80);
+    intake.move(55);
+    pros::delay(980);
     intake.move(-127);
     pros::delay(250);
     intake.move(0);
@@ -276,7 +295,7 @@ void testing(){
     left_mg.move(90);
     right_mg.move(90);
     pros::delay(100);
-    chassis.moveToPose(-68, -12, 355, 2000, {.forwards=true, .maxSpeed=90, .minSpeed=5},false);
+    chassis.moveToPose(-68, -12, 356, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5},false);
     intake.move(-127);
     left_mg.move(80);
     right_mg.move(80);
