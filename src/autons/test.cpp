@@ -7,7 +7,7 @@ void testing(){
 
     //starting position is same place as 15 sec auto place
     // setup
-    chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), 270);
+    chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), 90);
     level.set_value(false);
     pto.set_value(false);
     descore.set_value(true);
@@ -17,129 +17,270 @@ void testing(){
 
 
     //get the four balls
-    chassis.turnToPoint(-22.7, 24, 2000, {.forwards=true, .maxSpeed=80, .minSpeed=5},true);
-    chassis.moveToPoint(-22.7, 24, 2000, {.forwards=true, .maxSpeed=60},false);
+    chassis.turnToPoint(-23.1, 24, 500, {.forwards=true, .maxSpeed=90, .minSpeed=5},true);
+    chassis.moveToPoint(-23.1, 24, 2000, {.forwards=true, .maxSpeed=80},false);
 
 
     //turn around to middle goal
-    chassis.turnToHeading(315, 2000, {.maxSpeed=80}, false);
+    chassis.turnToHeading(318, 700, {.maxSpeed=80,.minSpeed=5},false);
 
-    left_mg.move(-70);
-    right_mg.move(-70);
-    pros::delay(600);
+    left_mg.move(-80);
+    right_mg.move(-80);
+    pros::delay(520);
     left_mg.move(0);
     right_mg.move(0);
 
 
-    //score
+    //score middle goal balls
     
     pto.set_value(true);
     gate.set_value(true);
     intake.move(0);
     pros::delay(200);
-    intake.move(40);
+    intake.move(43);
     pros::delay(50);
-    intake.move(30);
+    intake.move(38);
     pros::delay(1000);
     intake.move(-127);
     pros::delay(200);
     intake.move(0);
 
     
-    //goes next to matchload
+    //goes to matchload #1
 
-    chassis.moveToPoint(-44, 46, 2000, {.forwards=true, .maxSpeed=127}, true);
-    chassis.waitUntil(10);
-    intake.move(127);
-    pros::delay(200);
-    intake.move(-127);
-    pros::delay(200);
+    chassis.moveToPoint(-53, 47.5, 1500, {.forwards=true, .maxSpeed=80}, true);
+    chassis.waitUntil(8);
     intake.move(0);
     pto.set_value(false);
     gate.set_value(false);
     matchload.set_value(true);
     level.set_value(true);
-    pros::delay(100);
+    pros::delay(1290);
+    intake.move(127);
     chassis.turnToHeading(270, 2000, {.maxSpeed=70},false);
-    chassis.setPose(positionFromRaycast(front_dist.get()*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
-
-
-    //goes inside matchload
+    chassis.setPose(positionFromRaycast(fmax(front_disttwo.get(),front_dist.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
+    //goes inside matchload #1
 
     intake.move(127);
-    chassis.turnToPoint(-65, 49, 1000, {.forwards=true, .maxSpeed=80, .minSpeed=5, .earlyExitRange=5}, true);
-    chassis.moveToPoint(-65, 49, 2800, {.forwards=true, .maxSpeed=55}, true);
-    pros::delay(2800);
+    chassis.moveToPoint(-67, 48.5, 2300, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
+    pros::delay(2300);
 
 
     //going to score
 
-    chassis.moveToPoint(-25, 63, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127},true);
+    chassis.moveToPoint(-25, 62, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127},true);
     chassis.waitUntil(10);
     matchload.set_value(false);
-    pto.set_value(false);
+    pto.set_value(true);
     intake.move(0);
     pros::delay(100);
-    chassis.moveToPoint(40, 60, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127, .earlyExitRange=5}, false);
-    chassis.turnToHeading(90, 2000, {.maxSpeed=80}, false);
-    chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, EAST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
-    chassis.moveToPose(40, 47, 90, 2000, {.forwards=false,.maxSpeed=127}, true);
+    chassis.moveToPoint(28, 60, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127, .earlyExitRange=5}, true);
+    
+    chassis.turnToHeading(0, 2000, {.maxSpeed=80,.minSpeed=20}, true);
+    chassis.moveToPoint(26, 44, 2000, {.forwards=false,.maxSpeed=100},true);
+    chassis.turnToHeading(90, 2000, {.maxSpeed=80},false);
+
+    chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), chassis.getPose().theta);
+    
     chassis.moveToPoint(25, 47, 1200, {.forwards=false, .maxSpeed=55}, false);
 
 
-    //scoring
+    //scoring #1
 
-    pto.set_value(false);
     gate.set_value(true);
     pros::delay(200);
-    intake.move(90);
-    pros::delay(100);
-    intake.move(55);
-    pros::delay(900);
+    intake.move(95);
+    pros::delay(120);
+    intake.move(50);
+    pros::delay(860);
     intake.move(-127);
     pros::delay(200);
-    pto.set_value(true);
+    pto.set_value(false);
     gate.set_value(false);
     matchload.set_value(true);
     pros::delay(100);
     intake.move(127);
 
     
-    //matchload
+    //matchload #2
 
-    chassis.moveToPoint(65, 48.5, 2000, {.forwards=true, .maxSpeed=55}, true);
-    pros::delay(2800);
-    chassis.moveToPoint(25, 48, 2000, {.forwards=false, .maxSpeed=55}, false);
+    chassis.moveToPoint(65, 47.9, 2700, {.forwards=true, .maxSpeed=80}, true);
+    pros::delay(2700);
 
 
-    //scoring
+    //scoring #2
     
+    chassis.moveToPoint(25, 48, 2000, {.forwards=false, .maxSpeed=70}, false);
     pto.set_value(true);
     gate.set_value(true);
     pros::delay(200);
-    intake.move(90);
-    pros::delay(100);
-    intake.move(40);
-    pros::delay(900);
+    intake.move(80);
+    pros::delay(60);
+    intake.move(35);
+    pros::delay(1000);
     intake.move(-127);
     pros::delay(200);
     intake.move(0);
+    matchload.set_value(false);
     // matchload.set_value(false);
 
 
     //clear parking
 
-    chassis.moveToPose(64, 21, 180, 2000, {.forwards=true, .horizontalDrift=10, .maxSpeed=90, .minSpeed=5},false);
-    chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, NORTH), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, EAST), chassis.getPose().theta);
-
+    chassis.moveToPose(68, 12, 180, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=90},true);
+    chassis.waitUntil(3);
     intake.move(127);
-    pros::delay(300);
-    left_mg.move(60);
-    right_mg.move(60);
+    pros::delay(250);
     intake.move(-127);
-    pros::delay(300);
+    pros::delay(250);
     intake.move(0);
     pto.set_value(false);
     gate.set_value(false);
+    level.set_value(false);
     intake.move(127);
+    pros::delay(1490);
+
+
+    pros::delay(300);
+    left_mg.move(62);
+    right_mg.move(62);
+    pros::delay(3100);
+    left_mg.move(0);
+    right_mg.move(0);
+
+
+    //spin to middle again for scoring
+
+    chassis.turnToHeading(270, 2000, {.maxSpeed=80},false);
+    intake.move(0);
+    pto.set_value(true);
+    chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, EAST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
+    chassis.moveToPoint(27, -32, 2000, {.forwards=true, .maxSpeed=100},true);
+    chassis.turnToHeading(135, 2000, {.maxSpeed=80,.minSpeed=5},false);
+    
+    left_mg.move(-100);
+    right_mg.move(-100);
+    pros::delay(500);
+    left_mg.move(-60);
+    right_mg.move(-60);
+    pros::delay(200);
+    left_mg.move(0);
+    right_mg.move(0);
+
+
+    //middle goal score #2
+
+    gate.set_value(true);
+    int cnt=0;
+	pros::delay(500);
+	intake.move(30);
+	pros::delay(910);
+	intake.move(-127);
+	pros::delay(110);
+	while(arm_sensor.get_position()<11800){
+		intake.move(25);
+		cnt++;
+		pros::delay(10);
+		if(cnt>170)
+		{
+			break;
+		}
+	}
+	intake.move(-127);
+    pros::delay(250);
+    intake.move(0);
+    pto.set_value(false);
+
+
+    //going near matchload #3
+
+    chassis.moveToPoint(48, -45, 2000, {.forwards=true, .maxSpeed=80}, true);
+    chassis.waitUntil(10);
+    gate.set_value(false);
+    matchload.set_value(true);
+    level.set_value(true);
+    intake.move(127);
+    chassis.turnToHeading(90, 2000, {.maxSpeed=85,.minSpeed=5},false);
+    chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
+
+
+    //going into matchload #3
+    
+    // chassis.turnToPoint(65, -48.4, 1000, {.forwards=true, .maxSpeed=80}, true);
+    chassis.moveToPoint(67, -48.4, 2300, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
+    pros::delay(2300);
+
+
+    //going to score #3
+
+    chassis.moveToPoint(30, -64, 2000, {.forwards=false,.maxSpeed=127,.minSpeed=127,.earlyExitRange=5},true);
+    
+    chassis.moveToPoint(-25, -64, 2000, {.forwards=false,.maxSpeed=127,.minSpeed=127},true);
+    chassis.waitUntil(10);
+    intake.move(0);
+    matchload.set_value(false);
+    pto.set_value(true);
+    intake.move(0);
+    chassis.turnToHeading(180, 2000, {.maxSpeed=80,.minSpeed=5},false);
+    // chassis.moveToPoint(-26, -43, 2000,{.forwards=false,.maxSpeed=100,.minSpeed=5},false);
+    left_mg.move(-90);
+    right_mg.move(-90);
+    pros::delay(200);
+    chassis.turnToHeading(270, 2000,{.maxSpeed=80,.minSpeed=5},false);
+    chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
+
+
+    //score #3
+
+    chassis.moveToPoint(-25, -49, 2000, {.forwards=false, .maxSpeed=65}, false);
+    gate.set_value(true);
+    pros::delay(100);
+    intake.move(90);
+    pros::delay(80);
+    intake.move(35);
+    pros::delay(1000);
+    intake.move(-127);
+    pros::delay(250);
+    pto.set_value(false);
+    pros::delay(100);
+    gate.set_value(false);
+    intake.move(127);
+    matchload.set_value(true);
+
+
+    //matchload #4
+
+    chassis.moveToPoint(-67.1, -48.25, 1700, {.forwards=true, .maxSpeed=55}, false);
+    pros::delay(1700);
+    chassis.moveToPoint(-25, -49, 2000, {.forwards=false, .maxSpeed=70, .minSpeed=10},false);
+    pto.set_value(true);
+    matchload.set_value(false);
+
+    
+    //scoring #4
+
+    gate.set_value(true);
+    pros::delay(300);
+    intake.move(85);
+    pros::delay(60);
+    intake.move(35);
+    pros::delay(1050);
+    intake.move(-127);
+    pros::delay(250);
+    intake.move(0);
+    pto.set_value(false);
+
+
+    //PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK
+
+    left_mg.move(90);
+    right_mg.move(90);
+    pros::delay(100);
+    chassis.moveToPose(-68, -12, 355, 2000, {.forwards=true, .maxSpeed=90, .minSpeed=5},false);
+    intake.move(-127);
+    left_mg.move(80);
+    right_mg.move(80);
+    pros::delay(1190);
+    left_mg.move(0);
+    right_mg.move(0);
 }

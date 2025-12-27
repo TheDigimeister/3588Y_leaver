@@ -523,7 +523,7 @@ void opcontrol() {
 			if (arm_sensor.get_position() < 11500) {
 				pto.set_value(true);
 				intake_speed=56;
-				//intake speed should be 55 for skills
+				//intake speed should be 56 for skills
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
@@ -534,8 +534,8 @@ void opcontrol() {
 			gate.set_value(true);
 			if (arm_sensor.get_position() < 11500) {
 				pto.set_value(true);
-				intake_speed=40;
-				//intake speed should be 40 for skills
+				intake_speed=38;
+				//intake speed should be 38 for skills
 				intake.move(intake_speed);
 			}
 			else {intake.move(0);}
