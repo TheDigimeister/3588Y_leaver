@@ -22,7 +22,7 @@ void testing(){
     
     left_mg.move(-50);
     right_mg.move(-50);
-    pros::delay(50);
+    pros::delay(60);
 
 
     //turn around to middle goal
@@ -61,6 +61,9 @@ void testing(){
     intake.move(127);
     chassis.turnToHeading(270, 2000, {.maxSpeed=70},false);
     chassis.setPose(positionFromRaycast(fmax(front_disttwo.get(),front_dist.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, NORTH), chassis.getPose().theta);
+    
+    
+    
     //goes inside matchload #1
 
     intake.move(127);
@@ -79,7 +82,7 @@ void testing(){
 
     //going to score
 
-    chassis.moveToPoint(-25, 62, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127},true);
+    chassis.moveToPoint(-25, 61.5, 2000, {.forwards=false, .maxSpeed=127, .minSpeed=127},true);
     chassis.waitUntil(10);
     matchload.set_value(false);
     pto.set_value(true);
@@ -183,15 +186,13 @@ void testing(){
     gate.set_value(true);
     int cnt=0;
 	pros::delay(500);
-	intake.move(35);
+	intake.move(20);
 	pros::delay(800);
-	intake.move(-127);
-	pros::delay(165);
-	while(arm_sensor.get_position()<11900){
-		intake.move(26);
+	while(arm_sensor.get_position()<11800){
+		intake.move(25);
 		cnt++;
 		pros::delay(10);
-		if(cnt>195)
+		if(cnt>190)
 		{
 			break;
 		}
@@ -204,7 +205,7 @@ void testing(){
 
     //going near matchload #3
 
-    chassis.moveToPoint(48, -44.75, 2000, {.forwards=true, .maxSpeed=100}, true);
+    chassis.moveToPoint(48, -46.5, 2000, {.forwards=true, .maxSpeed=100}, true);
     chassis.waitUntil(10);
     gate.set_value(false);
     matchload.set_value(true);
@@ -217,17 +218,17 @@ void testing(){
     //going into matchload #3
     
     // chassis.turnToPoint(65, -48.4, 1000, {.forwards=true, .maxSpeed=80}, true);
-    chassis.moveToPoint(67, -48, 2200, {.forwards=true, .maxSpeed=127,.minSpeed=55}, true);
-    pros::delay(2200);
-    left_mg.move(-80);
-    right_mg.move(-80);
-    pros::delay(100);
+    chassis.moveToPoint(67, -48, 2000, {.forwards=true, .maxSpeed=127,.minSpeed=55}, true);
+    pros::delay(2000);
+    left_mg.move(-127);
+    right_mg.move(-127);
+    pros::delay(180);
     left_mg.move(127);
     right_mg.move(127);
-    pros::delay(120);
+    pros::delay(250);
     left_mg.move(0);
     right_mg.move(0);
-    pros::delay(1290);
+    pros::delay(1200);
 
 
     //going to score #3
@@ -297,9 +298,9 @@ void testing(){
     pros::delay(100);
     chassis.moveToPose(-68, -12, 356, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=5},false);
     intake.move(-127);
-    left_mg.move(80);
-    right_mg.move(80);
-    pros::delay(1190);
+    left_mg.move(70);
+    right_mg.move(70);
+    pros::delay(1340);
     left_mg.move(0);
     right_mg.move(0);
 }
