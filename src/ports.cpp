@@ -23,6 +23,3 @@ pros::ADIDigitalOut gate('G');
 // pros::ADIDigitalOut descore_left('');
 
 pros::Rotation arm_sensor(4);
-
-pros::Optical matchload_right(17);
-pros::Optical matchload_left(18);
