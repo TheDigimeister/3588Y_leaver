@@ -86,14 +86,15 @@ void overpwed(){
     // chassis.moveToPoint(26, 46, 2000, {.forwards=false,.maxSpeed=100},true);
     // chassis.turnToHeading(90, 2000, {.maxSpeed=70},false);
 
-    chassis.moveToPose(45, 52, 90, 5000, {.forwards=true,.maxSpeed=110,.minSpeed=30},false);
+    chassis.moveToPose(45, 53, 90, 5000, {.forwards=true,.maxSpeed=110,.minSpeed=35},true);
+    chassis.turnToHeading(90, 2000, {.maxSpeed=80,.minSpeed=7},false);
 
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, NORTH), chassis.getPose().theta);
     
 
     //scoring #1
 
-    chassis.moveToPoint(29.5, 48.5, 650, {.forwards=false, .maxSpeed=75}, false);
+    chassis.moveToPoint(29, 50, 650, {.forwards=false, .maxSpeed=75}, false);
     gate.set_value(true);
     pros::delay(200);
     intake.move(100);
@@ -111,13 +112,13 @@ void overpwed(){
     
     //matchload #2
 
-    chassis.moveToPoint(64.5, 47.95, 2500, {.forwards=true, .maxSpeed=80}, true);
+    chassis.moveToPoint(64.5, 47.88, 2500, {.forwards=true, .maxSpeed=80}, true);
     pros::delay(2500);
 
 
     //scoring #2
     
-    chassis.moveToPoint(29.5, 48.5, 1400, {.forwards=false, .maxSpeed=75}, false);
+    chassis.moveToPoint(29, 50, 1400, {.forwards=false, .maxSpeed=75}, false);
     pto.set_value(true);
     gate.set_value(true);
     intake.move(0);
@@ -135,7 +136,7 @@ void overpwed(){
 
     //clear parking
 
-    chassis.moveToPose(68, 12, 180, 1500, {.forwards=true, .maxSpeed=127, .minSpeed=127},true);
+    chassis.moveToPose(68, 14, 180, 1500, {.forwards=true, .maxSpeed=127, .minSpeed=127},true);
     pros::delay(500);
     gate.set_value(false);
     pto.set_value(false);
@@ -158,15 +159,15 @@ void overpwed(){
     intake.move(0);
     pto.set_value(true);
     chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, EAST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
-    chassis.moveToPoint(30, -32, 2000, {.forwards=true, .maxSpeed=100},true);
-    chassis.turnToHeading(135, 2000, {.maxSpeed=75,.minSpeed=5},false);
+    chassis.moveToPoint(29, -32, 2000, {.forwards=true, .maxSpeed=90},true);
+    chassis.turnToHeading(135.3, 2000, {.maxSpeed=75,.minSpeed=5},false);
     
     left_mg.move(-100);
     right_mg.move(-100);
     pros::delay(500);
     left_mg.move(-60);
     right_mg.move(-60);
-    pros::delay(210);
+    pros::delay(230);
     left_mg.move(0);
     right_mg.move(0);
 
@@ -176,13 +177,13 @@ void overpwed(){
     gate.set_value(true);
     int cnt=0;
 	pros::delay(500);
-	intake.move(28);
-	pros::delay(730);
+	intake.move(35);
+	pros::delay(660);
 	while(arm_sensor.get_position()<11800){
-		intake.move(26);
+		intake.move(27);
 		cnt++;
 		pros::delay(15);
-		if(cnt>164)
+		if(cnt>105)
 		{
 			break;
 		}
@@ -229,14 +230,15 @@ void overpwed(){
     // pros::delay(200);
     // chassis.turnToHeading(270, 2000,{.maxSpeed=80,.minSpeed=5},false);
 
-    chassis.moveToPose(-46, -50, 270, 3000, {.forwards=true,.maxSpeed=110,.minSpeed=30},true);
+    chassis.moveToPose(-46, -56, 270, 3000, {.forwards=true,.maxSpeed=110,.minSpeed=30},true);
+    chassis.turnToHeading(270, 2000, {.maxSpeed=80,.minSpeed=5},false);
 
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
 
     //score #3
 
-    chassis.moveToPoint(-29.5, -49, 800, {.forwards=false, .maxSpeed=75}, false);
+    chassis.moveToPoint(-29, -49.5, 800, {.forwards=false, .maxSpeed=75}, false);
     gate.set_value(true);
     pros::delay(100);
     intake.move(90);
@@ -254,13 +256,13 @@ void overpwed(){
 
     //matchload #4
 
-    chassis.moveToPoint(-64.5, -48.25, 1200, {.forwards=true, .maxSpeed=65}, false);
+    chassis.moveToPoint(-64.5, -47.95, 1200, {.forwards=true, .maxSpeed=65}, false);
     pros::delay(1200);
 
     
     //scoring #4
 
-    chassis.moveToPoint(-29.5, -49, 1600, {.forwards=false, .maxSpeed=75},false);
+    chassis.moveToPoint(-28.5, -49.5, 1600, {.forwards=false, .maxSpeed=80},false);
     pto.set_value(true);
     matchload.set_value(false);
     gate.set_value(true);
@@ -278,18 +280,18 @@ void overpwed(){
 
     //low goal for 100 points
 
-    chassis.moveToPoint(-46, -48, 2000,{.forwards=true, .maxSpeed=127,.minSpeed=127},true);
+    chassis.moveToPoint(-43.7, -48, 2000,{.forwards=true, .maxSpeed=127,.minSpeed=127},true);
     chassis.turnToHeading(270, 500, {}, false);
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
-    chassis.turnToHeading(45, 2000, {.maxSpeed=80,.minSpeed=5},false);
+    chassis.turnToHeading(49.6, 2000, {.maxSpeed=80,.minSpeed=5},false);
     left_mg.move(100);
     right_mg.move(100);
     intake.move(127);
-    pros::delay(1200);
-    left_mg.move(70);
-    right_mg.move(70);
-    pros::delay(600);
+    pros::delay(900);
+    left_mg.move(60);
+    right_mg.move(60);
+    pros::delay(500);
     left_mg.move(0);
     right_mg.move(0);
     intake.move(-55);    
