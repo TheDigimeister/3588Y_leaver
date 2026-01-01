@@ -68,8 +68,8 @@ void overpwed(){
     //goes inside matchload #1
 
     intake.move(127);
-    chassis.moveToPoint(-67, 48.5, 2000, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
-    pros::delay(2000);
+    chassis.moveToPoint(-67, 48.5, 2200, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
+    pros::delay(2200);
 
 
     //going to score
@@ -112,8 +112,8 @@ void overpwed(){
     
     //matchload #2
 
-    chassis.moveToPoint(65, 47.88, 2700, {.forwards=true, .maxSpeed=90,.minSpeed=10}, true);
-    pros::delay(2700);
+    chassis.moveToPoint(65, 47.88, 2800, {.forwards=true, .maxSpeed=90,.minSpeed=10}, true);
+    pros::delay(2800);
 
 
     //scoring #2
@@ -159,8 +159,8 @@ void overpwed(){
     intake.move(0);
     pto.set_value(true);
     chassis.setPose(positionFromRaycast(back_dist.get()*MM_TO_IN, BACK_DIST_OFFSET, EAST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
-    chassis.moveToPoint(29.15, -32, 2000, {.forwards=true, .maxSpeed=90},true);
-    chassis.turnToHeading(135.4, 2000, {.maxSpeed=75,.minSpeed=5},false);
+    chassis.moveToPoint(29.3, -32, 2000, {.forwards=true, .maxSpeed=90},true);
+    chassis.turnToHeading(135.45, 2000, {.maxSpeed=75,.minSpeed=5},false);
     
     left_mg.move(-100);
     right_mg.move(-100);
@@ -178,12 +178,14 @@ void overpwed(){
     int cnt=0;
 	pros::delay(500);
 	intake.move(35);
-	pros::delay(700);
+	pros::delay(860);
+    intake.move(-127);
+    pros::delay(110);
 	while(arm_sensor.get_position()<11800){
 		intake.move(26);
 		cnt++;
 		pros::delay(15);
-		if(cnt>105)
+		if(cnt>115)
 		{
 			break;
 		}
@@ -210,8 +212,8 @@ void overpwed(){
     //going into matchload #3
     
     // chassis.turnToPoint(65, -48.4, 1000, {.forwards=true, .maxSpeed=80}, true);
-    chassis.moveToPoint(65, -48.2, 1800, {.forwards=true, .maxSpeed=127,.minSpeed=55}, true);
-    pros::delay(1800);
+    chassis.moveToPoint(65, -48.2, 1900, {.forwards=true, .maxSpeed=127,.minSpeed=55}, true);
+    pros::delay(1900);
 
 
     //going to score #3
@@ -256,8 +258,8 @@ void overpwed(){
 
     //matchload #4
 
-    chassis.moveToPoint(-64.5, -47.95, 1400, {.forwards=true, .maxSpeed=65}, false);
-    pros::delay(1400);
+    chassis.moveToPoint(-64.5, -47.88, 1500, {.forwards=true, .maxSpeed=65}, false);
+    pros::delay(1500);
 
     
     //scoring #4
@@ -299,7 +301,7 @@ void overpwed(){
 
     left_mg.move(40);
     right_mg.move(40);
-    pros::delay(980);
+    pros::delay(970);
     left_mg.move(0);
     right_mg.move(0);
     pros::delay(200);
@@ -314,17 +316,17 @@ void overpwed(){
     pros::delay(100);
     intake.move(-127);
     pros::delay(1100);
-    chassis.turnToHeading(348, 2000, {.maxSpeed=80,.minSpeed=15},false);
+    chassis.turnToHeading(345, 2000, {.maxSpeed=80,.minSpeed=15},false);
 
 
     // //PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK
 
     left_mg.move(127);
     right_mg.move(127);
-    pros::delay(500);
+    pros::delay(520);
     left_mg.move(70);
     right_mg.move(70);
-    pros::delay(950);
+    pros::delay(980);
     left_mg.move(0);
     right_mg.move(0);
 }
