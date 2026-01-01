@@ -10,7 +10,7 @@ pros::Distance front_dist(19);
 pros::Distance left_dist(2);
 pros::Distance right_dist(10);
 pros::Distance back_dist(9);
-pros::Distance front_disttwo(17);
+pros::Distance front_disttwo(18);
 
 pros::ADIDigitalOut level('C');
 pros::ADIDigitalOut pto('A');
