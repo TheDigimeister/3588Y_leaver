@@ -271,7 +271,8 @@ void testing(){
 
     //matchload #4
 
-    chassis.moveToPoint(-67.1, -48.25, 1400, {.forwards=true, .maxSpeed=65}, false);
+    // chassis.moveToPoint(-67.1, -48.25, 1400, {.forwards=true, .maxSpeed=65}, false);
+    chassis.moveToPoint(-64.5, -47.88, 1500, {.forwards=true, .maxSpeed=65}, false);
     pros::delay(1400);
 
     
