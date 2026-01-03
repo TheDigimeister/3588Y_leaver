@@ -18,7 +18,7 @@ void overpwed(){
 
     //get the four balls
     // chassis.turnToPoint(-23, 24, 500, {.forwards=true, .maxSpeed=90, .minSpeed=5},true);
-    chassis.moveToPoint(-23, 23.9, 2000, {.forwards=true, .maxSpeed=80},false);
+    chassis.moveToPoint(-23, 23.9, 2000, {.forwards=true, .maxSpeed=85},false);
     
     left_mg.move(-50);
     right_mg.move(-50);
@@ -100,7 +100,7 @@ void overpwed(){
     intake.move(100);
     pros::delay(150);
     intake.move(52);
-    pros::delay(760);
+    pros::delay(750);
     intake.move(-127);
     pros::delay(200);
     pto.set_value(false);
@@ -112,8 +112,8 @@ void overpwed(){
     
     //matchload #2
 
-    chassis.moveToPoint(65, 47.88, 2800, {.forwards=true, .maxSpeed=90,.minSpeed=10}, true);
-    pros::delay(2800);
+    chassis.moveToPoint(65, 47.88, 2700, {.forwards=true, .maxSpeed=90,.minSpeed=10}, true);
+    pros::delay(2700);
 
 
     //scoring #2
@@ -126,7 +126,7 @@ void overpwed(){
     intake.move(95);
     pros::delay(120);
     intake.move(50);
-    pros::delay(865);
+    pros::delay(855);
     intake.move(-127);
     pros::delay(200);
     intake.move(0);
@@ -200,7 +200,7 @@ void overpwed(){
     //going near matchload #3
 
     // chassis.moveToPoint(48, -46.5, 2000, {.forwards=true, .maxSpeed=100}, true);
-    chassis.moveToPoint(48, -45.7, 2000, {.forwards=true, .maxSpeed=100}, true);
+    chassis.moveToPoint(48, -45.75, 2000, {.forwards=true, .maxSpeed=100}, true);
     chassis.waitUntil(10);
     gate.set_value(false);
     matchload.set_value(true);
@@ -213,7 +213,7 @@ void overpwed(){
     //going into matchload #3
     
     // chassis.turnToPoint(65, -48.4, 1000, {.forwards=true, .maxSpeed=80}, true);
-    chassis.moveToPoint(67, -48.45, 2000, {.forwards=true, .maxSpeed=127,.minSpeed=55}, true);
+    chassis.moveToPoint(67, -48.5, 2000, {.forwards=true, .maxSpeed=127,.minSpeed=55}, true);
     pros::delay(1900);
 
 
@@ -247,7 +247,7 @@ void overpwed(){
     intake.move(90);
     pros::delay(110);
     intake.move(50);
-    pros::delay(870);
+    pros::delay(860);
     intake.move(-127);
     pros::delay(250);
     pto.set_value(false);
@@ -272,9 +272,9 @@ void overpwed(){
     intake.move(0);
     pros::delay(300);
     intake.move(100);
-    pros::delay(100);
+    pros::delay(150);
     intake.move(55);
-    pros::delay(900);
+    pros::delay(800);
     intake.move(-127);
     pros::delay(250);
     intake.move(0);
