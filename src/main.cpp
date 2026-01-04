@@ -12,7 +12,7 @@ const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
-int selected_auton = 4;
+int selected_auton = 9;
 bool auton_selected = false;
 
 const char* auton_names[] = {
@@ -24,9 +24,9 @@ const char* auton_names[] = {
     "Skills",
 	"EZ Skills",
 	"PID Tune",
-	"rightLowhook7",
 	"96 skills",
-	"Overpowered"
+	"Overpowered",
+	"Signature Solo AWP Including Push"
 };
 
 /**
@@ -361,13 +361,13 @@ void autonomous() {
 			pidTune();
 			break;
 		case 8:
-			rightLowhook7();
-			break;
-		case 9:
 			testing();
 			break;
-		case 10:
+		case 9:
 			overpwed();
+			break;
+		case 10:
+			sigawp();
 			break;
 	}
 }
@@ -400,6 +400,10 @@ void opcontrol() {
 	bool descoreState = false;
 	bool prevDescoreState = false;
 
+	bool intakePressed = false;
+	bool intakeState = false;
+	bool prevIntakeState = false;
+
 	bool pto_state=false;
 	pto.set_value(false);
 
@@ -417,6 +421,7 @@ void opcontrol() {
 		levelPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
 		matchloadPressed = controller.get_digital(DIGITAL_A);
 		descorePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
+		intakePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
 
 		if (levelPressed && !prevLevelState) {
 			levelState = !levelState;
@@ -431,6 +436,11 @@ void opcontrol() {
 		if (descorePressed && !prevDescoreState) {
 			descoreState = !descoreState;
 			descore.set_value(descoreState);
+		}
+
+		if (intakePressed && !prevIntakeState) {
+			intakeState = !intakeState;
+			intake_lift.set_value(intakeState);
 		}
 		
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_B))
@@ -498,6 +508,7 @@ void opcontrol() {
 		prevLevelState = levelPressed;
 		prevMatchloadState = matchloadPressed;
 		prevDescoreState = descorePressed;
+		prevIntakeState = intakePressed;
 
 		//intake
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
@@ -592,7 +603,8 @@ void opcontrol() {
     	int rightX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
     	// move the robot
-    	chassis.arcade(leftY, rightX/1.61);
+    	chassis.arcade(leftY, rightX/1.55);
+		//skills turning should be 1.55
 
 		pros::delay(10);                               // Run for 20 ms then update
 	}

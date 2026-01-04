@@ -16,6 +16,7 @@ pros::ADIDigitalOut level('C');
 pros::ADIDigitalOut pto('A');
 pros::ADIDigitalOut matchload('E');
 pros::ADIDigitalOut descore('H');
+pros::ADIDigitalOut intake_lift('F');
 pros::ADIDigitalOut gate('G');
 
 pros::Rotation arm_sensor(4);

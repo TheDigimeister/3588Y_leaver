@@ -21,6 +21,7 @@ extern pros::ADIDigitalOut level;
 extern pros::ADIDigitalOut matchload;
 extern pros::ADIDigitalOut pto;
 extern pros::ADIDigitalOut descore;
+extern pros::ADIDigitalOut intake_lift;
 
 extern pros::Distance front_dist;
 extern pros::Distance back_dist;
