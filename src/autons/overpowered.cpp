@@ -22,7 +22,7 @@ void overpwed(){
     
     left_mg.move(-50);
     right_mg.move(-50);
-    pros::delay(59);
+    pros::delay(55);
 
 
     //turn around to middle goal
@@ -59,7 +59,7 @@ void overpwed(){
 
 
 
-    chassis.moveToPoint(-54, 42.3, 1500, {.forwards=true, .maxSpeed=85}, true);
+    chassis.moveToPoint(-54.2, 45, 1500, {.forwards=true, .maxSpeed=85}, true);
     chassis.waitUntil(8);
     intake.move(0);
     pto.set_value(false);
@@ -76,7 +76,7 @@ void overpwed(){
     //goes inside matchload #1
 
     intake.move(127);
-    chassis.moveToPoint(-67, 48.79, 2200, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
+    chassis.moveToPoint(-67, 48.79, 1000, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
     pros::delay(2200);
 
 
@@ -144,7 +144,7 @@ void overpwed(){
 
     //clear parking
 
-    chassis.moveToPose(68, 14, 180, 1500, {.forwards=true, .maxSpeed=127, .minSpeed=127},true);
+    chassis.moveToPose(68, 14, 175, 1500, {.forwards=true, .maxSpeed=127, .minSpeed=127},true);
     pros::delay(500);
     gate.set_value(false);
     pto.set_value(false);
@@ -154,11 +154,21 @@ void overpwed(){
     pros::delay(500);
 
 
-    left_mg.move(62);
-    right_mg.move(62);
-    pros::delay(3030);
-    left_mg.move(0);
-    right_mg.move(0);
+    while(true)
+    {
+        if(front_dist.get()<=770)
+        {
+            left_mg.move(0);
+            right_mg.move(0);
+            break;
+        }
+        else 
+        {
+            left_mg.move(70);
+            right_mg.move(70);
+        }
+        pros::delay(5);
+    }
 
 
     //spin to middle again for scoring
@@ -172,7 +182,7 @@ void overpwed(){
     
     left_mg.move(-100);
     right_mg.move(-100);
-    pros::delay(525);
+    pros::delay(535);
     pto.set_value(true);
     left_mg.move(-60);
     right_mg.move(-60);
@@ -186,8 +196,8 @@ void overpwed(){
     gate.set_value(true);
     int cnt=0;
 	pros::delay(500);
-	intake.move(42);
-	pros::delay(860);
+	intake.move(41);
+	pros::delay(870);
     intake.move(-127);
     pros::delay(110);
 	while(arm_sensor.get_position()<11755){
@@ -214,7 +224,7 @@ void overpwed(){
     matchload.set_value(true);
     level.set_value(true);
     intake.move(127);
-    chassis.turnToHeading(90, 2000, {.maxSpeed=85},false);
+    chassis.turnToHeading(90, 2000, {.maxSpeed=85,.minSpeed=5},false);
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, EAST), positionFromRaycast(right_dist.get()*MM_TO_IN, RIGHT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
 
@@ -242,14 +252,14 @@ void overpwed(){
     // chassis.turnToHeading(270, 2000,{.maxSpeed=80,.minSpeed=5},false);
 
     chassis.moveToPose(-45, -57.5, 270, 3000, {.forwards=true,.maxSpeed=110,.minSpeed=30},true);
-    chassis.turnToHeading(270, 2000, {.maxSpeed=75,.minSpeed=2},false);
+    chassis.turnToHeading(271, 2000, {.maxSpeed=75,.minSpeed=2},false);
 
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
 
     //score #3
 
-    chassis.moveToPoint(-29, -49.46, 800, {.forwards=false, .maxSpeed=75}, false);
+    chassis.moveToPoint(-29, -49.5, 800, {.forwards=false, .maxSpeed=75}, false);
     gate.set_value(true);
     pros::delay(100);
     intake.move(90);
@@ -267,14 +277,14 @@ void overpwed(){
 
     //matchload #4
 
-    chassis.moveToPoint(-64.5, -47.87, 1500, {.forwards=true, .maxSpeed=65}, false);
+    chassis.moveToPoint(-64.5, -47.85, 1500, {.forwards=true, .maxSpeed=65}, false);
     pros::delay(1500);
 
     
     //scoring #4
 
-    chassis.moveToPoint(-28.5, -49.45, 300, {.forwards=false, .maxSpeed=100},true);
-    chassis.moveToPoint(-28.5, -49.45, 1600, {.forwards=false,.maxSpeed=80},false);
+    chassis.moveToPoint(-28.5, -49.5, 300, {.forwards=false, .maxSpeed=100},true);
+    chassis.moveToPoint(-28.5, -49.5, 1600, {.forwards=false,.maxSpeed=80},false);
     pto.set_value(true);
     matchload.set_value(false);
     gate.set_value(true);
@@ -292,11 +302,11 @@ void overpwed(){
 
     //low goal for 100 points
 
-    chassis.moveToPoint(-43, -48, 2000,{.forwards=true, .maxSpeed=127,.minSpeed=127},true);
+    chassis.moveToPoint(-42.8, -48, 2000,{.forwards=true, .maxSpeed=127,.minSpeed=127},true);
     chassis.turnToHeading(270, 500, {}, false);
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
-    chassis.turnToHeading(47.3, 2000, {.maxSpeed=90},false);
+    chassis.turnToHeading(50, 2000, {.maxSpeed=90},false);
     
     
     //get 4 cross balls
@@ -309,9 +319,11 @@ void overpwed(){
 
     //aim for the center
 
-    left_mg.move(40);
-    right_mg.move(40);
-    pros::delay(910);
+    left_mg.move(60);
+    right_mg.move(60);
+    pros::delay(660);
+    intake_lift.set_value(true);
+    pros::delay(200);
     left_mg.move(0);
     right_mg.move(0);
     pros::delay(200);
@@ -319,25 +331,40 @@ void overpwed(){
 
     //score center
 
-    intake.move(-65);    
-    pros::delay(1500);
+    intake.move(-50);
+    left_mg.move(-50);
+    right_mg.move(-50);
+    pros::delay(150);
+    left_mg.move(50);
+    right_mg.move(50);
+    pros::delay(230);
+    left_mg.move(-50);
+    right_mg.move(-50);
+    pros::delay(150);
+    left_mg.move(50);
+    right_mg.move(50);
+    pros::delay(230);
+    left_mg.move(0);
+    right_mg.move(0);
+    pros::delay(1000);
 
 
     //turn around to park
 
-    left_mg.move(-78);
+    left_mg.move(-75);
     right_mg.move(-127);
-    pros::delay(100);
+    pros::delay(110);
     intake.move(-127);
-    pros::delay(1080);
+    pros::delay(1120);
     chassis.turnToHeading(342, 2000, {.maxSpeed=80,.minSpeed=15},false);
 
 
     // //PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK
 
-    left_mg.move(95);
-    right_mg.move(127);
+    left_mg.move(88);
+    right_mg.move(120);
     pros::delay(520);
+    intake_lift.set_value(false);
     while(true)
     {
         if(front_dist.get()>=1625&&front_dist.get()<=1670)

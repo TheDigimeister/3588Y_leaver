@@ -12,7 +12,7 @@ const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
-int selected_auton = 9;
+int selected_auton = 8;
 bool auton_selected = false;
 
 const char* auton_names[] = {
@@ -421,7 +421,7 @@ void opcontrol() {
 		levelPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
 		matchloadPressed = controller.get_digital(DIGITAL_A);
 		descorePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
-		intakePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
+		intakePressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_B);
 
 		if (levelPressed && !prevLevelState) {
 			levelState = !levelState;
@@ -443,68 +443,68 @@ void opcontrol() {
 			intake_lift.set_value(intakeState);
 		}
 		
-		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_B))
-		{
-			descore.set_value(false);
-			descoreState=false;
-			prevDescoreState=true;
-			float current_heading = normalizeAngle(chassis.getPose().theta);
-			float error90=fabs(current_heading-90);
-			float error270=fabs(current_heading-270);
-			if(error90>error270)
-			{
-				left_mg.move(50);
-				right_mg.move(50);
-				pros::delay(150);
-				chassis.turnToHeading(340, 500, {.minSpeed=5, .earlyExitRange=1},false);
-				left_mg.move(75);
-				right_mg.move(75);
-				pros::delay(350);
-				chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
-			}
-			else 
-			{
-				left_mg.move(50);
-				right_mg.move(50);
-				pros::delay(150);
-				chassis.turnToHeading(160, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
-				left_mg.move(75);
-				right_mg.move(75);
-				pros::delay(350);
-				chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
-			}
-		}
-		else if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
-		{
-			descore.set_value(false);
-			descoreState=false;
-			prevDescoreState=true;
-			float current_heading = normalizeAngle(chassis.getPose().theta);
-			float error90=fabs(current_heading-90);
-			float error270=fabs(current_heading-270);
-			if(error90>error270)
-			{
-				left_mg.move(50);
-				right_mg.move(50);
-				pros::delay(170);
-				chassis.turnToHeading(20, 500, {.minSpeed=5, .earlyExitRange=1},false);
-				left_mg.move(-75);
-				right_mg.move(-75);
-				pros::delay(285);
-				chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
-			}
-			else 
-			{
-				left_mg.move(50);
-				right_mg.move(50);
-				pros::delay(170);
-				chassis.turnToHeading(220, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
-				left_mg.move(-75);
-				right_mg.move(-75);
-				pros::delay(285);
-				chassis.turnToHeading(90, 500, {.maxSpeed=100,.minSpeed=40,.earlyExitRange=1},false);
-			}
-		}
+		// if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_B))
+		// {
+		// 	descore.set_value(false);
+		// 	descoreState=false;
+		// 	prevDescoreState=true;
+		// 	float current_heading = normalizeAngle(chassis.getPose().theta);
+		// 	float error90=fabs(current_heading-90);
+		// 	float error270=fabs(current_heading-270);
+		// 	if(error90>error270)
+		// 	{
+		// 		left_mg.move(50);
+		// 		right_mg.move(50);
+		// 		pros::delay(150);
+		// 		chassis.turnToHeading(340, 500, {.minSpeed=5, .earlyExitRange=1},false);
+		// 		left_mg.move(75);
+		// 		right_mg.move(75);
+		// 		pros::delay(350);
+		// 		chassis.turnToHeading(90, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+		// 	}
+		// 	else 
+		// 	{
+		// 		left_mg.move(50);
+		// 		right_mg.move(50);
+		// 		pros::delay(150);
+		// 		chassis.turnToHeading(160, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+		// 		left_mg.move(75);
+		// 		right_mg.move(75);
+		// 		pros::delay(350);
+		// 		chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+		// 	}
+		// }
+		// else if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
+		// {
+		// 	descore.set_value(false);
+		// 	descoreState=false;
+		// 	prevDescoreState=true;
+		// 	float current_heading = normalizeAngle(chassis.getPose().theta);
+		// 	float error90=fabs(current_heading-90);
+		// 	float error270=fabs(current_heading-270);
+		// 	if(error90>error270)
+		// 	{
+		// 		left_mg.move(50);
+		// 		right_mg.move(50);
+		// 		pros::delay(170);
+		// 		chassis.turnToHeading(20, 500, {.minSpeed=5, .earlyExitRange=1},false);
+		// 		left_mg.move(-75);
+		// 		right_mg.move(-75);
+		// 		pros::delay(285);
+		// 		chassis.turnToHeading(270, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+		// 	}
+		// 	else 
+		// 	{
+		// 		left_mg.move(50);
+		// 		right_mg.move(50);
+		// 		pros::delay(170);
+		// 		chassis.turnToHeading(220, 500, {.maxSpeed=80,.minSpeed=5,.earlyExitRange=1},false);
+		// 		left_mg.move(-75);
+		// 		right_mg.move(-75);
+		// 		pros::delay(285);
+		// 		chassis.turnToHeading(90, 500, {.maxSpeed=100,.minSpeed=40,.earlyExitRange=1},false);
+		// 	}
+		// }
 		prevLevelState = levelPressed;
 		prevMatchloadState = matchloadPressed;
 		prevDescoreState = descorePressed;
