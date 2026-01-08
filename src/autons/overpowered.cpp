@@ -50,14 +50,8 @@ void overpwed(){
     
     //goes to matchload #1
 
+
     // chassis.moveToPoint(-53, 47.6, 1500, {.forwards=true, .maxSpeed=85}, true);
-
-
-    //THIS THING WORKS DO NOT CHANGE IT
-    // chassis.moveToPoint(-54, 42.1, 1500, {.forwards=true, .maxSpeed=85}, true);
-
-
-
 
     chassis.moveToPoint(-54.2, 45, 1500, {.forwards=true, .maxSpeed=85}, true);
     chassis.waitUntil(8);
@@ -77,7 +71,7 @@ void overpwed(){
 
     intake.move(127);
     chassis.moveToPoint(-67, 48.79, 1000, {.forwards=true, .maxSpeed=127,.minSpeed=50}, true);
-    pros::delay(2200);
+    pros::delay(2600);
 
 
     //going to score
@@ -120,8 +114,8 @@ void overpwed(){
     
     //matchload #2
 
-    chassis.moveToPoint(65, 47.88, 2700, {.forwards=true, .maxSpeed=90,.minSpeed=10}, true);
-    pros::delay(2700);
+    chassis.moveToPoint(65, 47.88, 2800, {.forwards=true, .maxSpeed=90,.minSpeed=10}, true);
+    pros::delay(2800);
 
 
     //scoring #2
@@ -178,7 +172,7 @@ void overpwed(){
     chassis.moveToPoint(29.15, -32, 2000, {.forwards=true, .maxSpeed=90},true);
     chassis.waitUntil(15);
     intake.move(0);
-    chassis.turnToHeading(135.45, 2000, {.maxSpeed=75,.minSpeed=5},false);
+    chassis.turnToHeading(135.4, 2000, {.maxSpeed=75,.minSpeed=5},false);
     
     left_mg.move(-100);
     right_mg.move(-100);
@@ -251,15 +245,15 @@ void overpwed(){
     // pros::delay(200);
     // chassis.turnToHeading(270, 2000,{.maxSpeed=80,.minSpeed=5},false);
 
-    chassis.moveToPose(-45, -57.5, 270, 3000, {.forwards=true,.maxSpeed=110,.minSpeed=30},true);
-    chassis.turnToHeading(271, 2000, {.maxSpeed=75,.minSpeed=2},false);
+    chassis.moveToPose(-45, -55, 270, 3000, {.forwards=true,.maxSpeed=110,.minSpeed=30},true);
+    chassis.turnToHeading(270, 2000, {.maxSpeed=75,.minSpeed=2},false);
 
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
 
     //score #3
 
-    chassis.moveToPoint(-29, -49.5, 800, {.forwards=false, .maxSpeed=75}, false);
+    chassis.moveToPoint(-29, -51.1, 800, {.forwards=false, .maxSpeed=75}, false);
     gate.set_value(true);
     pros::delay(100);
     intake.move(90);
@@ -283,8 +277,8 @@ void overpwed(){
     
     //scoring #4
 
-    chassis.moveToPoint(-28.5, -49.5, 300, {.forwards=false, .maxSpeed=100},true);
-    chassis.moveToPoint(-28.5, -49.5, 1600, {.forwards=false,.maxSpeed=80},false);
+    chassis.moveToPoint(-28.5, -51, 300, {.forwards=false, .maxSpeed=100},true);
+    chassis.moveToPoint(-28.5, -51, 1600, {.forwards=false,.maxSpeed=80},false);
     pto.set_value(true);
     matchload.set_value(false);
     gate.set_value(true);
@@ -302,11 +296,11 @@ void overpwed(){
 
     //low goal for 100 points
 
-    chassis.moveToPoint(-42.8, -48, 2000,{.forwards=true, .maxSpeed=127,.minSpeed=127},true);
+    chassis.moveToPoint(-41, -48, 2000,{.forwards=true, .maxSpeed=127,.minSpeed=127},true);
     chassis.turnToHeading(270, 500, {}, false);
     chassis.setPose(positionFromRaycast(fmax(front_dist.get(),front_disttwo.get())*MM_TO_IN, FRONT_DIST_OFFSET, WEST), positionFromRaycast(left_dist.get()*MM_TO_IN, LEFT_DIST_OFFSET, SOUTH), chassis.getPose().theta);
 
-    chassis.turnToHeading(50, 2000, {.maxSpeed=90},false);
+    chassis.turnToHeading(48, 2000, {.maxSpeed=90},false);
     
     
     //get 4 cross balls
@@ -314,16 +308,16 @@ void overpwed(){
     left_mg.move(90);
     right_mg.move(90);
     intake.move(127);
-    pros::delay(845);
+    pros::delay(830);
 
 
     //aim for the center
 
     left_mg.move(60);
     right_mg.move(60);
-    pros::delay(660);
+    pros::delay(600);
     intake_lift.set_value(true);
-    pros::delay(200);
+    pros::delay(170);
     left_mg.move(0);
     right_mg.move(0);
     pros::delay(200);
@@ -331,31 +325,25 @@ void overpwed(){
 
     //score center
 
-    intake.move(-50);
+    intake.move(-40);
     left_mg.move(-50);
     right_mg.move(-50);
     pros::delay(150);
     left_mg.move(50);
     right_mg.move(50);
-    pros::delay(230);
-    left_mg.move(-50);
-    right_mg.move(-50);
-    pros::delay(150);
-    left_mg.move(50);
-    right_mg.move(50);
-    pros::delay(230);
+    pros::delay(210);
     left_mg.move(0);
     right_mg.move(0);
-    pros::delay(1000);
+    pros::delay(1500);
 
 
     //turn around to park
 
-    left_mg.move(-75);
+    left_mg.move(-76);
     right_mg.move(-127);
     pros::delay(110);
     intake.move(-127);
-    pros::delay(1120);
+    pros::delay(1150);
     chassis.turnToHeading(342, 2000, {.maxSpeed=80,.minSpeed=15},false);
 
 

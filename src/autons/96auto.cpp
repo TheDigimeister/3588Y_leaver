@@ -302,12 +302,11 @@ void testing(){
 
     // //PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK PARK
 
-    left_mg.move(65);
-    right_mg.move(127);
-    pros::delay(1000);
-    right_mg.move(100);
-    left_mg.move(100);
-    pros::delay(300);
+    left_mg.move(90);
+    right_mg.move(90);
+    pros::delay(100);
+    intake.move(-127);
+    chassis.moveToPose(-68, -12, 356, 2000, {.forwards=true, .maxSpeed=127, .minSpeed=15},false);
     while(true)
     {
         if(front_dist.get()>=1625&&front_dist.get()<=1670)
