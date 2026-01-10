@@ -12,7 +12,7 @@ const float RAYCAST_RESET_ANGLE_RANGE = 20.0; // ± degrees from 0°/360° or 90
 const float RAYCAST_RESET_MIN_ERROR = 0.0; // minimum error required before applying correction
 const float RAYCAST_RESET_MAX_ERROR = 3.0; // maximum error to restrict correction (e.g. matchloader depth)
 
-int selected_auton = 9;
+int selected_auton = 4;
 bool auton_selected = false;
 
 const char* auton_names[] = {
@@ -64,6 +64,12 @@ void initialize() {
 	pros::lcd::register_btn0_cb(on_left_button);   // Left button
     pros::lcd::register_btn1_cb(on_center_button); // Center button  
     pros::lcd::register_btn2_cb(on_right_button);  // Right button
+
+	bool descorePressed = false;
+	bool descoreState = false;
+	bool prevDescoreState = false;
+
+	gate.set_value(false);
 
 	chassis.calibrate();
 
@@ -505,6 +511,7 @@ void opcontrol() {
 		// 		chassis.turnToHeading(90, 500, {.maxSpeed=100,.minSpeed=40,.earlyExitRange=1},false);
 		// 	}
 		// }
+
 		prevLevelState = levelPressed;
 		prevMatchloadState = matchloadPressed;
 		prevDescoreState = descorePressed;
@@ -573,7 +580,7 @@ void opcontrol() {
 			intake.move(30);
 			pros::delay(680);
 			intake.move(26);
-			pros::delay(575);
+			pros::delay(590);
 			intake.move(-127);
 			pros::delay(110);
 			while(arm_sensor.get_position()<11800){
